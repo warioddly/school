@@ -13,26 +13,37 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-//         \App\Models\User::factory(10)->create();
-
-//         \App\Models\User::factory()->create([
-//             'name' => 'Test User',
-//             'email' => 'test@example.com',
-//         ]);
-
 
         // Seed Admin
-
         \App\Models\User::factory()->create([
-            'surname' => 'Super',
+            'surname' => 'Admin',
             'name' => 'User',
             'patronymic' => 'Puper',
             'phone' => '0222222222',
-            'email' => 'sexy@admin.com',
+            'email' => 'admin@gmail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
         ]);
 
+        \App\Models\User::factory()->create([
+            'surname' => 'Teacher',
+            'name' => 'Ainura',
+            'patronymic' => 'Djumakarievna',
+            'phone' => '0224221212',
+            'email' => 'teacher@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ]);
+
+        \App\Models\User::factory()->create([
+            'surname' => 'Student',
+            'name' => 'Joe',
+            'patronymic' => 'Warioddly',
+            'phone' => '0221221312',
+            'email' => 'student@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ]);
 
     }
 }

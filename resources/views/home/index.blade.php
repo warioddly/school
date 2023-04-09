@@ -20,7 +20,7 @@
                         </a>
                     </form>
                 </div>
-                <h4 class="page-title">Analytics</h4>
+                <h4 class="page-title">Home</h4>
             </div>
         </div>
     </div>
@@ -36,9 +36,8 @@
                         <span class="text-success me-2"><span class="mdi mdi-arrow-up-bold"></span> 5.27%</span>
                         <span class="text-nowrap">Since last month</span>
                     </p>
-                </div> <!-- end card-body-->
+                </div>
             </div>
-            <!--end card-->
 
             <div class="card tilebox-one">
                 <div class="card-body">
@@ -51,7 +50,6 @@
                     </p>
                 </div> <!-- end card-body-->
             </div>
-            <!--end card-->
 
             <div class="card cta-box overflow-hidden">
                 <div class="card-body">
@@ -433,3 +431,17 @@
     </div>
 
 @endsection
+
+@push('header_scripts')
+    <link href="{{ asset("assets/css/vendor/jquery-jvectormap-1.2.2.css") }}" rel="stylesheet" type="text/css" />
+@endpush
+
+@push('footer_scripts')
+
+    <script src="{{ asset("assets/js/vendor/apexcharts.min.js") }}"></script>
+    <script src="{{ asset("assets/js/vendor/jquery-jvectormap-1.2.2.min.js") }}"></script>
+    <script src="{{ asset("assets/js/vendor/jquery-jvectormap-world-mill-en.js") }}"></script>
+
+    <script src="{{ asset("assets/js/pages/dashboard-analytics.js") }}"></script>
+
+@endpush

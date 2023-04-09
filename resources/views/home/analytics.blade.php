@@ -24,7 +24,6 @@
             </div>
         </div>
     </div>
-    <!-- end page title -->
 
     <div class="row">
         <div class="col-xl-3 col-lg-4">
@@ -96,11 +95,10 @@
                     <div dir="ltr">
                         <div id="sessions-overview" class="apex-charts mt-3" data-colors="#0acf97"></div>
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
+                </div>
+            </div>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-12">
@@ -129,11 +127,10 @@
                             <div id="country-chart" class="apex-charts" data-colors="#10c469"></div>
                         </div>
                     </div>
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- end row -->
 
     <div class="row">
         <div class="col-xl-4 col-lg-12">
@@ -250,11 +247,10 @@
                         </div>
                     </div>
 
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- end row -->
 
     <div class="row">
         <div class="col-xl-4 col-lg-6">
@@ -429,12 +425,25 @@
                             </tr>
                             </tbody>
                         </table>
-                    </div> <!-- end table-responsive-->
-                </div> <!-- end card-body-->
-            </div> <!-- end card-->
-        </div> <!-- end col-->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
-    <!-- end row -->
 
 @endsection
+
+@push('header_scripts')
+    <link href="{{ asset("assets/css/vendor/jquery-jvectormap-1.2.2.css") }}" rel="stylesheet" type="text/css" />
+@endpush
+
+@push('footer_scripts')
+
+    <script src="{{ asset("assets/js/vendor/apexcharts.min.js") }}"></script>
+    <script src="{{ asset("assets/js/vendor/jquery-jvectormap-1.2.2.min.js") }}"></script>
+    <script src="{{ asset("assets/js/vendor/jquery-jvectormap-world-mill-en.js") }}"></script>
+
+    <script src="{{ asset("assets/js/pages/dashboard-analytics.js") }}"></script>
+
+@endpush
