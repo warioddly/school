@@ -3,69 +3,70 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-class PermissionSeeder extends Seeder
+class PermissionsSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
-        // Define permissions
+
         $permissions = [
             'view users',
             'edit users',
+            'create users',
             'delete users',
             'view roles',
             'edit roles',
+            'create roles',
             'delete roles',
-            'view permissions',
-            'edit permissions',
-            'delete permissions',
+            'view schedule',
+            'create schedule',
+            'edit schedule',
+            'delete schedule',
         ];
 
-        // Create permissions
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
 
-        // Define roles
         $roles = [
             'admin',
-            'moderator',
-            'user',
+            'teacher',
+            'student',
         ];
 
-        // Create roles and assign permissions
         foreach ($roles as $roleName) {
+
             $role = Role::create(['name' => $roleName]);
-            if ($roleName === 'admin') {
-                $role->givePermissionTo(Permission::all());
-            } elseif ($roleName === 'moderator') {
+
+            if ($roleName === 'teacher') {
                 $role->givePermissionTo([
                     'view users',
-                    'edit users',
-                    'view roles',
-                    'edit roles',
+                    'view schedule',
+                    'create schedule',
+                    'edit schedule',
+                    'delete schedule',
                 ]);
-            } else {
-                $role->givePermissionTo('view users');
             }
+            elseif ($roleName === 'admin') $role->givePermissionTo(Permission::all());
+            else $role->givePermissionTo('view schedule');
         }
 
         // Assign roles to users
-        $admin = User::query()->where('email', 'sexy@admin.com')->first();
+        $admin = User::query()->where('email', 'admin@gmail.com')->first();
         $admin->assignRole('admin');
 
         $moderator = User::query()->where('email', 'teacher@gmail.com')->first();
-        $moderator->assignRole('moderator');
+        $moderator->assignRole('teacher');
 
         $user = User::query()->where('email', 'student@gmail.com')->first();
-        $user->assignRole('user');
+        $user->assignRole('student');
 
     }
 }
-

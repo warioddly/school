@@ -102,33 +102,41 @@
         </li>
 
 
+        @canany(['view users', "create users", "edit users", "delete users", 'view roles', "create roles", "edit roles", "delete roles"])
 
-        <li class="side-nav-title side-nav-item">Administration</li>
+            <li class="side-nav-title side-nav-item">Administration</li>
 
-        <li class="side-nav-item">
-            <a href="{{ route('users') }}" class="side-nav-link">
-                <i class="uil-users-alt"></i>
-                <span> Users </span>
-            </a>
-        </li>
+            @canany(['view users', "create users", "edit users", "delete users"])
+                <li class="side-nav-item">
+                    <a href="{{ route('users') }}" class="side-nav-link">
+                        <i class="uil-users-alt"></i>
+                        <span> Users </span>
+                    </a>
+                </li>
+            @endcanany
 
-        <li class="side-nav-item">
-            <a href="{{ route('roles') }}" class="side-nav-link">
-                <i class="mdi mdi-robot"></i>
-                <span> Roles </span>
-            </a>
-        </li>
+            @canany(['view roles', "create roles", "edit roles", "delete roles"])
 
+                <li class="side-nav-item">
+                    <a href="{{ route('roles') }}" class="side-nav-link">
+                        <i class="mdi mdi-robot"></i>
+                        <span> Roles </span>
+                    </a>
+                </li>
 
-    </ul>
+            @endcanany
 
-    <div class="help-box help-box-light text-center">
-        <img src="{{ asset("assets/images/help-icon.svg") }}" height="90" alt="Helper Icon Image" />
-        <h5 class="mt-3">CREATED BY WARIODDLY</h5>
-        <p class="mb-3">Чтобы получить полный доступ напишите на почту</p>
-        <a href="mailto: warioddly@gmail.com" class="btn btn-outline-primary btn-sm">Написать</a>
-    </div>
+        @endcanany
 
-    <div class="clearfix"></div>
+</ul>
+
+<div class="help-box help-box-light text-center">
+<img src="{{ asset("assets/images/help-icon.svg") }}" height="90" alt="Helper Icon Image" />
+<h5 class="mt-3">CREATED BY WARIODDLY</h5>
+<p class="mb-3">Чтобы получить полный доступ напишите на почту</p>
+<a href="mailto: warioddly@gmail.com" class="btn btn-outline-primary btn-sm">Написать</a>
+</div>
+
+<div class="clearfix"></div>
 
 </div>

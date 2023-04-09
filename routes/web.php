@@ -68,14 +68,19 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     // User Routes
-    Route::group(['prefix' => 'users'], function () {
+    Route::group(['prefix' => 'users', 'middleware' => ['can:view users']], function () {
         Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users');
+        Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+        Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
     });
 
 
     // Role Routes
-    Route::group(['prefix' => 'roles'], function () {
+    Route::group(['prefix' => 'roles', 'middleware' => ['can:view roles']], function () {
         Route::get('/', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
+        Route::post('/store', [App\Http\Controllers\RoleController::class, 'store'])->name('roles.store');
+        Route::patch('/update/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
+        Route::delete('/delete/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
     });
 
 

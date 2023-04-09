@@ -20,7 +20,9 @@ $(document).ready(function () {
             },
         },
         r = [];
-    $("#products-datatable").DataTable({
+
+
+    $("#role-datatable").DataTable({
         language: {
             paginate: { previous: "<i class='mdi mdi-chevron-left'>", next: "<i class='mdi mdi-chevron-right'>" },
             info: "Showing roles _START_ to _END_ of _TOTAL_",
@@ -28,10 +30,39 @@ $(document).ready(function () {
         },
         pageLength: 10,
         columns: [
-            { orderable: 1 },
-            { orderable: !1 },
+            { orderable: 0, },
+            { orderable: 1, },
+            { orderable: !0, },
         ],
-        select: { style: "multi" },
-        order: [[4, "desc"]],
     });
+
+
+    $('#delete-role-modal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget);
+        const roleName = button.data('role-name');
+        const form = $(this).find('form');
+        const action = button.attr('href');
+        console.log(action);
+        form.attr('action', action);
+        $('#role-name').text(roleName);
+    });
+
+
+    $('#edit-role-modal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget);
+        const roleName = button.attr('data-role-name');
+        const rolePermissions = JSON.parse(button.attr('data-permissions'));
+        const form = $(this).find('form');
+        const action =  button.attr('href');
+        form.attr('action', action);
+        form.find('#role-name').val(roleName);
+        const title = form.find('#edit-role');
+        const select = form.find('#permissions-edit');
+        title.val(roleName);
+        select.val(rolePermissions);
+        select.trigger('change');
+    });
+
 });
+
+

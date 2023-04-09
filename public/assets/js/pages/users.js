@@ -1,5 +1,7 @@
 $(document).ready(function () {
     "use strict";
+
+
     var t = {
             chart: { type: "line", width: 80, height: 35, sparkline: { enabled: !0 } },
             series: [],
@@ -20,11 +22,13 @@ $(document).ready(function () {
             },
         },
         r = [];
-    $("#products-datatable").DataTable({
+
+
+    $("#user-datatable").DataTable({
         language: {
             paginate: { previous: "<i class='mdi mdi-chevron-left'>", next: "<i class='mdi mdi-chevron-right'>" },
-            info: "Showing sellers _START_ to _END_ of _TOTAL_",
-            lengthMenu: 'Display <select class=\'form-select form-select-sm ms-1 me-1\'><option value="10">10</option><option value="20">20</option><option value="-1">All</option></select> sellers',
+            info: "Showing users _START_ to _END_ of _TOTAL_",
+            lengthMenu: 'Display <select class=\'form-select form-select-sm ms-1 me-1\'><option value="10">10</option><option value="20">20</option><option value="-1">All</option></select> users',
         },
         pageLength: 10,
         columns: [
@@ -39,14 +43,12 @@ $(document).ready(function () {
             { orderable: !0 },
             { orderable: !0 },
             { orderable: !0 },
-            { orderable: !0 },
-            { orderable: !1 },
             { orderable: !1 },
         ],
         select: { style: "multi" },
         order: [[4, "desc"]],
         drawCallback: function () {
-            $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#products-datatable_length label").addClass("form-label");
+            $(".dataTables_paginate > .pagination").addClass("pagination-rounded"), $("#user-datatable_length label").addClass("form-label");
             for (var e = 0; e < r.length; e++)
                 try {
                     r[e].destroy();
@@ -62,4 +64,33 @@ $(document).ready(function () {
                 });
         },
     });
+
+
+    $('#delete-user-modal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget);
+        const roleName = button.data('role-name');
+        const form = $(this).find('form');
+        const action = button.attr('href');
+        console.log(action);
+        form.attr('action', action);
+        $('#role-name').text(roleName);
+    });
+
+
+    $('#edit-user-modal').on('show.bs.modal', function (event) {
+        const button = $(event.relatedTarget);
+        const roleName = button.attr('data-role-name');
+        const rolePermissions = JSON.parse(button.attr('data-permissions'));
+        const form = $(this).find('form');
+        const action =  button.attr('href');
+        form.attr('action', action);
+        form.find('#role-name').val(roleName);
+        const title = form.find('#edit-role');
+        const select = form.find('#permissions-edit');
+        title.val(roleName);
+        select.val(rolePermissions);
+        select.trigger('change');
+    });
+
+
 });

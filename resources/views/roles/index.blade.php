@@ -5,6 +5,7 @@
 
 @section('content')
 
+
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
@@ -15,10 +16,12 @@
                             <li class="breadcrumb-item active">Sellers</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Users</h4>
+                    <h4 class="page-title">Roles</h4>
                 </div>
             </div>
         </div>
+
+        @include('layouts.fragments.alerts')
 
         <div class="row">
             <div class="col-12">
@@ -26,35 +29,70 @@
                     <div class="card-body">
                         <div class="row mb-2">
                             <div class="col-sm-4">
-                                <a href="javascript:void(0);" class="btn btn-danger mb-2"><i class="mdi mdi-plus-circle me-2"></i> Add Role</a>
+                                @can(["create roles"])
+                                    <a href="javascript:void(0);" class="btn btn-danger mb-2"
+                                       data-bs-toggle="modal" data-bs-target="#create-role-modal"
+                                    ><i class="mdi mdi-plus-circle me-2"></i> Add Role</a>
+                                @endcan
                             </div>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="products-datatable">
-                                <thead class="table-light">
-                                <tr>
-                                    <th>Role name</th>
-                                    <th style="width: 75px;">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <span class="fw-semibold">121</span>
-                                    </td>
-                                    <td>
-                                        <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                        <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @if (count($roles) == 0)
+                            <h2 class="text-center">Roles is empty</h2>
+                        @else
+                            <div class="table-responsive">
+                                <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="role-datatable">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>Role name</th>
+                                        <th>User With This Role</th>
+                                        <th style="width: 75px;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach($roles as $role)
+                                        <tr>
+                                            <td><span class="fw-semibold"> {{ __($role->name) }}</span></td>
+                                            <td><span class="fw-semibold"> {{ count($role->users) }}</span></td>
+                                            <td>
+
+                                                @can(["edit roles"])
+                                                    <a data-role-name="{{ $role->name }}"
+                                                       href="{{ route('roles.update', $role->id) }}"
+                                                       data-bs-toggle="modal" data-bs-target="#edit-role-modal"
+                                                       data-permissions="{{ json_encode($role->permissions()->pluck('id')->toArray()) }}"
+                                                       class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
+                                                @endcan
+
+                                                @can(["delete roles"])
+                                                    <a class="action-icon"
+                                                       data-role-name="{{ $role->name }}"
+                                                       href="{{ route('roles.destroy', $role->id) }}"
+                                                       data-bs-toggle="modal" data-bs-target="#delete-role-modal"
+                                                    > <i class="mdi mdi-delete"></i></a>
+                                                @endcan
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>
         </div>
+
+        @include('roles.fragments.create_modal')
+
+        @include('roles.fragments.edit_modal')
+
+        @include('roles.fragments.delete_modal')
+
 
 @endsection
 
@@ -73,4 +111,5 @@
     <!-- third party js ends -->
 
     <script src="{{ asset("assets/js/pages/roles.js") }}"></script>
+
 @endpush
