@@ -73,6 +73,12 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
+    // Role Routes
+    Route::group(['prefix' => 'roles'], function () {
+        Route::get('/', [App\Http\Controllers\RoleController::class, 'index'])->name('roles');
+    });
+
+
 
 
 });

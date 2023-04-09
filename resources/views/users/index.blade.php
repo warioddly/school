@@ -34,7 +34,7 @@
                                     <button type="button" class="btn btn-light mb-2 me-1">Import</button>
                                     <button type="button" class="btn btn-light mb-2">Export</button>
                                 </div>
-                            </div><!-- end col-->
+                            </div>
                         </div>
 
                         <div class="table-responsive">

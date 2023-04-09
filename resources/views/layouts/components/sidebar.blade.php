@@ -113,12 +113,11 @@
         </li>
 
         <li class="side-nav-item">
-            <a href="{{ route('schedule') }}" class="side-nav-link">
+            <a href="{{ route('roles') }}" class="side-nav-link">
                 <i class="mdi mdi-robot"></i>
-                <span> User roles </span>
+                <span> Roles </span>
             </a>
         </li>
-
 
 
     </ul>
