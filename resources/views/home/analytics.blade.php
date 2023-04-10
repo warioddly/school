@@ -101,38 +101,6 @@
     </div>
 
     <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <div class="dropdown float-end">
-                        <a href="#" class="dropdown-toggle arrow-none card-drop"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mdi mdi-dots-vertical"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">Refresh Report</a>
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
-                        </div>
-                    </div>
-                    <h4 class="header-title">Sessions by country</h4>
-
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div id="world-map-markers" class="mt-3 mb-3" style="height: 300px">
-                            </div>
-                        </div>
-                        <div class="col-lg-4" dir="ltr">
-                            <div id="country-chart" class="apex-charts" data-colors="#10c469"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-xl-4 col-lg-12">
             <div class="card">
                 <div class="card-body">

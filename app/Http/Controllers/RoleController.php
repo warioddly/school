@@ -22,25 +22,26 @@ class RoleController extends Controller
 
     public function store(RoleStoreRequest $request): RedirectResponse
     {
-
         $newRole = Role::create(['name' => $request->name]);
         $newRole->syncPermissions($request->permissions);
-
         return redirect()->back()->with('success', __('Role added successfully'));
-
     }
 
 
 
     public function destroy(int $id): RedirectResponse
     {
+
+        if ($id == 1) return redirect()->back()->withErrors(['You can\'t delete this system role']);
+
         $role = Role::query()->findOrFail($id);
+
         if ($role) {
             $role->delete();
             return redirect()->back()->with('success', 'Role successfully deleted');
-        } else {
-            return redirect()->back()->withErrors(['Role not found']);
         }
+        else return redirect()->back()->withErrors(['Role not found']);
+
     }
 
 

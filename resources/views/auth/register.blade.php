@@ -16,7 +16,6 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
-
                     <div class="mb-3">
                         <label for="surename" class="form-label">Surename</label>
                         <input value="{{ old('surename') }}"

@@ -1,11 +1,13 @@
 <div class="leftside-menu leftside-menu-detached">
 
-    <div class="leftbar-user">
-        <a href="{{ route("profile") }}">
-            <img src="{{ asset("assets/images/users/avatar-1.jpg") }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
-            <span class="leftbar-user-name">{{ Str::length(Auth::user()->surname) > 10 ? Str::limit(Auth::user()->surname, 1, '.') : Auth::user()->surname}} {{ Auth::user()->name }}</span>
-        </a>
-    </div>
+    @if (auth()->check())
+        <div class="leftbar-user">
+            <a href="{{ route("profile") }}">
+                <img src="{{ asset("assets/images/users/avatar-1.jpg") }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                <span class="leftbar-user-name">{{ Str::length(Auth::user()->surname) > 10 ? Str::limit(Auth::user()->surname, 1, '.') : Auth::user()->surname}} {{ Auth::user()->name }}</span>
+            </a>
+        </div>
+    @endif
 
     <ul class="side-nav">
 
