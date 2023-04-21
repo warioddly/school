@@ -6,10 +6,12 @@
             <img src="{{ asset("assets/images/users/avatar-1.jpg") }}" alt="user-image" class="rounded-circle">
         </span>
         <span>
-        <span
-            class="account-user-name">{{ Str::length(Auth::user()->surname) > 10 ? Str::limit(Auth::user()->surname, 1, '.') : Auth::user()->surname}} {{ Auth::user()->name }}</span>
-            <span class="account-position">{{ __("Student") }}</span>
-        </span>
+        @if (auth()->check())
+            <span
+                class="account-user-name">{{ Str::length(Auth::user()->surname) > 10 ? Str::limit(Auth::user()->surname, 1, '.') : Auth::user()->surname}} {{ Auth::user()->name }}</span>
+                <span class="account-position"> {{ Auth::user()->getRoleNames()->map(fn ($name) => __($name))->implode(', ') }}</span>
+            </span>
+        @endif
     </a>
     <div
         class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown"

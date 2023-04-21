@@ -19,13 +19,13 @@ class UserController extends Controller
         $users = null;
         $roles = null;
 
-        if ($user->hasRole('teacher')) {
-            $users = User::query()->whereHas('roles', fn ($query) => $query->where('name', '=', 'student'))->get();
-            $roles = User::query()->whereHas('roles', fn ($query) => $query->where('name', '!=', 'admin'))->get();
-        }
-        elseif ($user->hasRole('admin')) {
+        if ($user->hasRole('admin')) {
             $users = User::query()->whereHas('roles', fn ($query) => $query->where('name', '!=', 'admin'))->get();
             $roles = Role::all();
+        }
+        elseif (!$user->hasRole('student')) {
+            $users = User::query()->whereHas('roles', fn ($query) => $query->where('name', '=', 'student'))->get();
+            $roles = Role::query()->where('name', '!=', 'admin')->get();
         }
         else abort(404);
 

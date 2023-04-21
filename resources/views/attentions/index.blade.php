@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Course')
+@section('title', 'Attentions')
 
 @section('content')
 
@@ -14,14 +14,18 @@
                         <li class="breadcrumb-item active">Projects List</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Projects</h4>
+                <h4 class="page-title">Attentions</h4>
             </div>
         </div>
     </div>
 
     <div class="row mb-2">
         <div class="col-sm-4">
-            <a href="{{ route('courses.create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i> Create Project</a>
+
+{{--            @canany(["create attention"])--}}
+                <a href="{{ route('attentions.create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i> Create Attention</a>
+{{--            @endcanany--}}
+
         </div>
         <div class="col-sm-8">
             <div class="text-sm-end">
@@ -43,6 +47,7 @@
     </div>
 
     <div class="row">
+
         <div class="col-lg-6 col-xxl-3">
             <!-- project card -->
             <div class="card d-block">
@@ -73,14 +78,14 @@
 
                     <!-- project detail-->
                     <p class="mb-1">
-                                        <span class="pe-2 text-nowrap mb-2 d-inline-block">
-                                            <i class="mdi mdi-format-list-bulleted-type text-muted"></i>
-                                            <b>21</b> Tasks
-                                        </span>
+                        <span class="pe-2 text-nowrap mb-2 d-inline-block">
+                            <i class="mdi mdi-format-list-bulleted-type text-muted"></i>
+                            <b>21</b> Tasks
+                        </span>
                         <span class="text-nowrap mb-2 d-inline-block">
-                                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
-                                            <b>741</b> Comments
-                                        </span>
+                            <i class="mdi mdi-comment-multiple-outline text-muted"></i>
+                            <b>741</b> Comments
+                        </span>
                     </p>
                     <div id="tooltip-container">
                         <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
@@ -98,19 +103,19 @@
                             +7 more
                         </a>
                     </div>
-                </div> <!-- end card-body-->
+
+                </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item p-3">
-                        <!-- project progress-->
                         <p class="mb-2 fw-bold">Progress <span class="float-end">100%</span></p>
                         <div class="progress progress-sm">
                             <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                            </div><!-- /.progress-bar -->
-                        </div><!-- /.progress -->
+                            </div>
+                        </div>
                     </li>
                 </ul>
-            </div> <!-- end card-->
-        </div> <!-- end col -->
+            </div>
+        </div>
 
         <div class="col-md-6 col-xxl-3">
             <!-- project card -->
@@ -179,7 +184,8 @@
                     </li>
                 </ul>
             </div> <!-- end card-->
-        </div> <!-- end col -->
+        </div>
+
         <div class="col-md-6 col-xxl-3">
             <!-- project card -->
             <div class="card d-block">
@@ -240,7 +246,7 @@
                     </li>
                 </ul>
             </div> <!-- end card-->
-        </div> <!-- end col -->
+        </div>
 
         <div class="col-md-6 col-xxl-3">
             <!-- project card -->
@@ -309,7 +315,8 @@
                     </li>
                 </ul>
             </div> <!-- end card-->
-        </div> <!-- end col -->
+        </div>
+
     </div>
 
     <div class="row">

@@ -1,11 +1,13 @@
 <div class="leftside-menu leftside-menu-detached">
 
-    <div class="leftbar-user">
-        <a href="{{ route("profile") }}">
-            <img src="{{ asset("assets/images/users/avatar-1.jpg") }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
-            <span class="leftbar-user-name">{{ Str::length(Auth::user()->surname) > 10 ? Str::limit(Auth::user()->surname, 1, '.') : Auth::user()->surname}} {{ Auth::user()->name }}</span>
-        </a>
-    </div>
+    @if (auth()->check())
+        <div class="leftbar-user">
+            <a href="{{ route("profile") }}">
+                <img src="{{ asset("assets/images/users/avatar-1.jpg") }}" alt="user-image" height="42" class="rounded-circle shadow-sm">
+                <span class="leftbar-user-name">{{ Str::length(Auth::user()->surname) > 10 ? Str::limit(Auth::user()->surname, 1, '.') : Auth::user()->surname}} {{ Auth::user()->name }}</span>
+            </a>
+        </div>
+    @endif
 
     <ul class="side-nav">
 
@@ -37,7 +39,7 @@
         </li>
 
         <li class="side-nav-item">
-            <a href="#" class="side-nav-link">
+            <a href="{{ route("attentions") }}" class="side-nav-link">
                 <i class="uil-rss"></i>
                 <span> Attentions </span>
             </a>
@@ -49,13 +51,6 @@
             <a href="{{ route('schedule') }}" class="side-nav-link">
                 <i class="uil-calender"></i>
                 <span> Schedule </span>
-            </a>
-        </li>
-
-        <li class="side-nav-item">
-            <a href="#" class="side-nav-link">
-                <i class="uil-comments-alt"></i>
-                <span> Chat </span>
             </a>
         </li>
 
@@ -100,7 +95,6 @@
                 </ul>
             </div>
         </li>
-
 
         @canany(['view users', "create users", "edit users", "delete users", 'view roles', "create roles", "edit roles", "delete roles"])
 
