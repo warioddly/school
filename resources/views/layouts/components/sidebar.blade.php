@@ -39,7 +39,7 @@
         </li>
 
         <li class="side-nav-item">
-            <a href="#" class="side-nav-link">
+            <a href="{{ route("attentions") }}" class="side-nav-link">
                 <i class="uil-rss"></i>
                 <span> Attentions </span>
             </a>
@@ -51,13 +51,6 @@
             <a href="{{ route('schedule') }}" class="side-nav-link">
                 <i class="uil-calender"></i>
                 <span> Schedule </span>
-            </a>
-        </li>
-
-        <li class="side-nav-item">
-            <a href="#" class="side-nav-link">
-                <i class="uil-comments-alt"></i>
-                <span> Chat </span>
             </a>
         </li>
 
@@ -102,7 +95,6 @@
                 </ul>
             </div>
         </li>
-
 
         @canany(['view users', "create users", "edit users", "delete users", 'view roles', "create roles", "edit roles", "delete roles"])
 

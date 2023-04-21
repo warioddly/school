@@ -54,16 +54,18 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
+    // Schedule Routes
+    Route::group(['prefix' => 'attentions'], function () {
+        Route::get('/', [App\Http\Controllers\AttentionController::class, 'index'])->name('attentions');
+        Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('attentions.create');
+    });
+
+
+
     // Notification Routes
     Route::group(['prefix' => 'notifications'], function () {
         Route::get('/', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
         Route::get('/create', [App\Http\Controllers\ScheduleController::class, 'create'])->name('notifications.create');
-    });
-
-
-    // Chat Routes
-    Route::group(['prefix' => 'chat'], function () {
-        Route::get('/', [App\Http\Controllers\ChatController::class, 'index'])->name('chat');
     });
 
 
@@ -82,8 +84,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('/update/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
         Route::delete('/delete/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
     });
-
-
 
 
 });
