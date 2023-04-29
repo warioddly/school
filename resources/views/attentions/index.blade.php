@@ -19,6 +19,8 @@
         </div>
     </div>
 
+    @include('layouts.fragments.alerts')
+
     <div class="row mb-2">
         <div class="col-sm-4">
 
@@ -43,7 +45,7 @@
                     <button type="button" class="btn btn-link text-muted"><i class="dripicons-checklist"></i></button>
                 </div>
             </div>
-        </div><!-- end col-->
+        </div>
     </div>
 
     <div class="row">
