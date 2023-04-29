@@ -16,7 +16,7 @@
                 </div>
                 <div class="d-flex align-items-center"  id="tooltip-back-container">
                     <a href="{{ route('attentions') }}" class="me-2"  data-bs-container="#tooltip-back-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Back"><i class="uil-backward"></i></a>
-                    <h4 class="page-title">Create Attention</h4>
+                    <h4 class="page-title">Edit Attention</h4>
                 </div>
             </div>
         </div>
@@ -28,6 +28,7 @@
                 <div class="card-body">
 
                     <form action="{{ route("attentions.store") }}" method="post">
+
                         @csrf
 
                         <div class="row">

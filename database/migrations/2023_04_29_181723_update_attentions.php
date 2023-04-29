@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
-        Schema::create('attentions', function (Blueprint $table) {
-            $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->string("badge")->nullable();
-            $table->string("color")->default("#727cf5");
-            $table->timestamps();
+        Schema::table('attentions', function (Blueprint $table) {
+            $table->text('description')->change();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attentions');
+        Schema::table('attentions', function (Blueprint $table) {
+            $table->dropColumn('description');
+        });
     }
 };

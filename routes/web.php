@@ -58,6 +58,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'attentions'], function () {
         Route::get('/', [App\Http\Controllers\AttentionController::class, 'index'])->name('attentions');
         Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('attentions.create');
+        Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('attentions.store');
+        Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('attentions.delete');
+
     });
 
 
