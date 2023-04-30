@@ -27,31 +27,31 @@
             <div class="card">
                 <div class="card-body">
 
-                    <form action="{{ route("attentions.store") }}" method="post">
-
+                    <form action="{{ route("attentions.update", $attention->id) }}" method="post">
                         @csrf
+                        @method("PUT")
 
                         <div class="row">
                             <div class="col-12">
     
                                 <div class="mb-3">
                                     <label for="projectname" class="form-label">Title</label>
-                                    <input type="text" id="projectname" class="form-control" placeholder="Enter project name">
+                                    <input type="text" id="projectname" value="{{ $attention->title }}" name="title" class="form-control" placeholder="Enter title">
                                 </div>
     
                                 <div class="mb-3">
                                     <label for="project-overview" class="form-label">Overview</label>
-                                    <textarea class="form-control" id="project-overview" rows="5" placeholder="Enter some information about attention.." required></textarea>
+                                    <textarea class="form-control" id="project-overview" rows="5" name="description" placeholder="Enter some information about attention.." required>{{ $attention->description }}</textarea>
                                 </div>
     
                                 <div class="mb-3">
                                     <label for="badges" class="form-label">Badge</label>
-                                    <input type="text" id="badges" class="form-control" name="badge" placeholder="Enter badge name">
+                                    <input type="text" id="badges" class="form-control" value="{{ $attention->badge }}" name="badge" placeholder="Enter badge name">
                                 </div>
     
                                 <div class="mb-3">
                                     <label for="badge-color" class="form-label">Badge Color</label>
-                                    <input class="form-control" id="badge-color" type="color" name="color" value="#727cf5">
+                                    <input class="form-control" id="badge-color" type="color" name="color" value="{{ $attention->color }}"  name="color" >
                                 </div>
 
 

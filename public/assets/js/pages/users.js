@@ -71,7 +71,6 @@ $(document).ready(function () {
         const roleName = button.data('role-name');
         const form = $(this).find('form');
         const action = button.attr('href');
-        console.log(action);
         form.attr('action', action);
         $('#role-name').text(roleName);
     });
