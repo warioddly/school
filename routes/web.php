@@ -58,8 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'attentions'], function () {
         Route::get('/', [App\Http\Controllers\AttentionController::class, 'index'])->name('attentions');
         Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('attentions.create');
+        Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('attentions.edit');
+        Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('attentions.show');
         Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('attentions.store');
-        Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('attentions.delete');
+        Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('attentions.update');
+        Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('attentions.destroy');
 
     });
 

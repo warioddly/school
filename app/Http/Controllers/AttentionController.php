@@ -14,7 +14,10 @@ class AttentionController extends Controller
 
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('attentions.index');
+
+        $attentions = Attentions::latest()->get();
+
+        return view('attentions.index', compact('attentions'));
     }
 
 
@@ -26,9 +29,10 @@ class AttentionController extends Controller
 
     public function store(CreateRequest $request)
     {
-        $product = Attentions::create($request->validated());
+
+        Attentions::create($request->validated());
     
-        return redirect()->route('attentions.index')->with('success', 'Attention created successfully.');
+        return redirect()->route('attentions')->with('success', 'Attention created successfully.');
     }
 
     public function show($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
@@ -54,7 +58,7 @@ class AttentionController extends Controller
         $attention = Attentions::findOrFail($id);
         $attention->update($request->validated());
 
-        return redirect()->route('attentions.index')->with('success', 'Attention updated successfully.');
+        return redirect()->route('attentions')->with('success', 'Attention updated successfully.');
     }
 
 
@@ -64,7 +68,7 @@ class AttentionController extends Controller
         $attention = Attentions::findOrFail($id);
         $attention->delete();
 
-        return redirect()->route('attentions.index')->with('success', 'Attention deleted successfully.');
+        return redirect()->route('attentions')->with('success', 'Attention deleted successfully.');
     }
 
 

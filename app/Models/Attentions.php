@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Attentions extends Model
 {
     use HasFactory;
+
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'title',
+        'badge',
+        'description',
+        'color',
+    ];
+
 }

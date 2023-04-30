@@ -22,6 +22,9 @@
         </div>
     </div>
 
+
+    @include('layouts.fragments.alerts')
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -35,12 +38,12 @@
     
                                 <div class="mb-3">
                                     <label for="projectname" class="form-label">Title</label>
-                                    <input type="text" id="projectname" class="form-control" placeholder="Enter project name">
+                                    <input type="text" id="projectname" class="form-control" name="title" placeholder="Enter project name">
                                 </div>
     
                                 <div class="mb-3">
                                     <label for="project-overview" class="form-label">Overview</label>
-                                    <textarea class="form-control" id="project-overview" rows="5" placeholder="Enter some information about attention.." required></textarea>
+                                    <textarea class="form-control" id="project-overview" rows="5" name="description" placeholder="Enter some information about attention.." required></textarea>
                                 </div>
     
                                 <div class="mb-3">
