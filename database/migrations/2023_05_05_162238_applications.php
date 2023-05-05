@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('video_courses', function (Blueprint $table) {
+        
+        Schema::create('attentions', function (Blueprint $table) {
             $table->id();
             $table->string("title");
             $table->text("description");
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('video_courses');
+        Schema::dropIfExists('attentions');
     }
 };
