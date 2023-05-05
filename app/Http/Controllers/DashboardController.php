@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
 
 
     public function index(): Renderable
     {
-        return view('landing.index');
+        return view('home.index');
     }
 
 
