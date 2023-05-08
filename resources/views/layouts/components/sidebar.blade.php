@@ -100,6 +100,16 @@
 
             <li class="side-nav-title side-nav-item">Administration</li>
 
+
+            @canany(['view users', "create users", "edit users", "delete users"])
+                <li class="side-nav-item">
+                    <a href="{{ route('applications') }}" class="side-nav-link">
+                        <i class="uil-users-alt"></i>
+                        <span> Applications </span>
+                    </a>
+                </li>
+            @endcanany
+
             @canany(['view users', "create users", "edit users", "delete users"])
                 <li class="side-nav-item">
                     <a href="{{ route('users') }}" class="side-nav-link">

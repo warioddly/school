@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applications;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\Applications\ApplicationCreateRequest;
+use Illuminate\Console\Application;
+use Illuminate\Support\Facades\Hash;
 
 class ApplicationController extends Controller
 {
@@ -12,54 +16,61 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $applications = Applications::query()->where('status', 'pending')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('applications.index', compact('applications'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ApplicationCreateRequest $request)
     {
-        //
+        Applications::create($request->validated());
+
+        return redirect()->route('home')->with('success', 'Your application has been sent successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Applications $applications)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Applications $applications)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Applications $applications)
+    public function update(Request $request, $id)
     {
-        //
+        
+        $application = Applications::findOrFail($id);
+
+        $userData = tap(User::create([
+            'surname' => $application->surname,
+            'name' => $application->name,
+            'email' => $application->email,
+            'phone' => $application->phone,
+            'password' => Hash::make('password'),
+        ]), function ($user) {
+            $user->assignRole('student');
+            $user->save();
+        });
+
+        // TODO: Send email with password
+
+        $application->update([
+            'user_id' => $userData->id,
+            'status' => 'accepted',
+        ]);
+
+        return redirect()->route('applications')->with('success', 'Application successfully accepted.');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Applications $applications)
+    public function destroy($id)
     {
-        //
+
+        $application = Applications::findOrFail($id);
+        $application->delete();
+        
+        return redirect()->route('applications')->with('success', 'Application successfully deleted.');
     }
 }

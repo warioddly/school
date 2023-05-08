@@ -3,9 +3,9 @@
 
     <head>
         <meta charset="utf-8" />
-        <title>Landing Page | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
+        <title>Landing Page | AUTO SCHOOL | WARIODDLY </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="AUTO SCHOOL web-application | CREATED BY WARIODDLY" name="description" />
         <meta content="Coderthemes" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -496,6 +496,37 @@
                     </div>
                 </div>
 
+
+                @if(session('success'))
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <strong>Success - </strong> {{ session('success') }}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @if ($errors->any())
+
+                    @foreach ($errors->all() as $error)
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    <strong>Error - </strong> {{ $error }}
+                                </div>
+                            </div>
+
+                        </div>
+                    @endforeach
+
+                @endif
+
+
+
+
                 <div class="row align-items-center mt-3" id="contacts">
                     <div class="col-md-4">
                         <p class="text-muted"><span class="fw-bold">Customer Support:</span><br> <span class="d-block mt-1">+1 234 56 7894</span></p>
@@ -505,19 +536,36 @@
                     </div>
 
                     <div class="col-md-8">
-                        <form>
+                        <form action="{{ route('applications.store') }}" method="POST">
+
+                            @csrf
 
                             <div class="row mt-4">
                                 <div class="col-lg-6">
                                     <div class="mb-2">
-                                        <label for="fullname" class="form-label">Your Name</label>
-                                        <input class="form-control form-control-light" type="text" id="fullname" placeholder="Name...">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input class="form-control form-control-light" type="text" id="name" required name="name" placeholder="Name...">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mb-2">
+                                        <label for="surname" class="form-label">Your surname</label>
+                                        <input class="form-control form-control-light" type="text" required="" id="surname" name="surname" placeholder="Enter you surname...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-1">
+                                <div class="col-lg-6">
+                                    <div class="mb-2">
+                                        <label for="patronymic" class="form-label">Your Patronymic</label>
+                                        <input class="form-control form-control-light" type="text" id="patronymic" name="patronymic" placeholder="Patronymic...">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-2">
                                         <label for="emailaddress" class="form-label">Your Email</label>
-                                        <input class="form-control form-control-light" type="email" required="" id="emailaddress" placeholder="Enter you email...">
+                                        <input class="form-control form-control-light" type="email" required="" id="emailaddress" name="email"  placeholder="Enter you email...">
                                     </div>
                                 </div>
                             </div>
@@ -526,13 +574,13 @@
                                 <div class="col-lg-6">
                                     <div class="mb-2">
                                         <label for="phone" class="form-label">Phone</label>
-                                        <input class="form-control form-control-light" type="text" id="phone" placeholder="Phone...">
+                                        <input class="form-control form-control-light" type="text" id="phone" name="phone" required placeholder="Phone...">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="mb-2">
                                         <label for="subject" class="form-label">Your Subject</label>
-                                        <input class="form-control form-control-light" type="text" id="subject" placeholder="Enter subject...">
+                                        <input class="form-control form-control-light" type="text" id="subject" name="title"  placeholder="Enter subject...">
                                     </div>
                                 </div>
                             </div>
@@ -541,7 +589,7 @@
                                 <div class="col-lg-12">
                                     <div class="mb-2">
                                         <label for="comments" class="form-label">Message</label>
-                                        <textarea id="comments" rows="4" class="form-control form-control-light" placeholder="Type your message here..."></textarea>
+                                        <textarea id="comments" rows="4" class="form-control form-control-light"  name="description"  placeholder="Type your message here..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -552,6 +600,7 @@
                                         class="mdi mdi-telegram ms-1"></i> </button>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
