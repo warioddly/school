@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::post('/applications/register', [App\Http\Controllers\ApplicationController::class, 'store'])->name('applications.store');
+
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -89,6 +91,14 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
 
+        // Notification Routes
+        Route::group(['prefix' => 'applications'], function () {
+            Route::get('/', [App\Http\Controllers\ApplicationController::class, 'index'])->name('applications');
+            Route::patch('/update/{id}', [App\Http\Controllers\ApplicationController::class, 'update'])->name('applications.update');
+            Route::delete('/delete/{id}', [App\Http\Controllers\ApplicationController::class, 'destroy'])->name('applications.destroy');
+        });
+
+
         // User Routes
         Route::group(['prefix' => 'users', 'middleware' => ['can:view users']], function () {
             Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users');
@@ -104,6 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::patch('/update/{id}', [App\Http\Controllers\RoleController::class, 'update'])->name('roles.update');
             Route::delete('/delete/{id}', [App\Http\Controllers\RoleController::class, 'destroy'])->name('roles.destroy');
         });
+
 
     });
 

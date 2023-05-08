@@ -12,12 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         
-        Schema::create('attentions', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
-            $table->string("badge")->nullable();
-            $table->string("color")->default("#727cf5");
+            $table->string("title")->nullable();
+            $table->text("description")->nullable();
+            $table->string("email");
+            $table->string("phone");
+            $table->string('surname');
+            $table->string('name');
+            $table->string('patronymic')->nullable();;
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attentions');
+        Schema::dropIfExists('applications');
     }
 };
