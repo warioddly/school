@@ -67,9 +67,9 @@
 
                     <li><a href="{{ route('courses.materials') }}">{{ __('Materials') }}</a></li>
 
-                    <li><a href="{{ route('courses') }}"> {{ __('Video Courses') }} </a></li>
+                    <li><a href="{{ route('video.courses') }}"> {{ __('Video Courses') }} </a></li>
 
-                    <li><a href="#">{{ __('Tags') }}</a></li>
+                    <li><a href="{{ route('tags') }}">{{ __('Tags') }}</a></li>
 
                     <li><a href="#">{{ __('Documents') }}</a></li>
 

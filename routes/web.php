@@ -87,16 +87,25 @@ Route::group(['middleware' => 'auth'], function () {
 
             // Schedule Routes
             Route::group(['prefix' => 'video'], function () {
-                Route::get('/', [App\Http\Controllers\AttentionController::class, 'index'])->name('video.courses');
-                Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
-                Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
-                Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
-                Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
-                Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
-                Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
+                Route::get('/', [App\Http\Controllers\CourseController::class, 'videoMaterials'])->name('video.courses');
+                // Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
+                // Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
+                // Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
+                // Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
+                // Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
+                // Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
 
             });
 
+        });
+
+
+        // Tag Routes
+        Route::group(['prefix' => 'tags'], function () {
+            Route::get('/', [App\Http\Controllers\TagController::class, 'index'])->name('tags');
+            Route::post('/store', [App\Http\Controllers\TagController::class, 'store'])->name('tags.store');
+            Route::patch('/update/{id}', [App\Http\Controllers\TagController::class, 'update'])->name('tags.update');
+            Route::delete('/delete/{id}', [App\Http\Controllers\TagController::class, 'destroy'])->name('tags.destroy');
         });
 
 

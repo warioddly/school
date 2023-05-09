@@ -16,6 +16,15 @@ class CourseController extends Controller
     }
 
 
+    public function videoMaterials(): Renderable
+    {
+
+        $materials = CourseMaterials::all();
+
+        return view('courses.materials.index', compact('materials'));
+    }
+
+
     public function create(): Renderable
     {
         return view('courses.video.create');
