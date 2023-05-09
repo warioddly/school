@@ -71,15 +71,31 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 
-        // Schedule Routes
-        Route::group(['prefix' => 'video-courses'], function () {
-            Route::get('/', [App\Http\Controllers\AttentionController::class, 'index'])->name('video.courses');
-            Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
-            Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
-            Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
-            Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
-            Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
-            Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
+        Route::group(['prefix' => 'courses'], function() {
+
+            // Schedule Routes
+            Route::group(['prefix' => 'materials'], function () {
+                Route::get('/', [App\Http\Controllers\CourseController::class, 'index'])->name('courses.materials');
+                // Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
+                // Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
+                // Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
+                // Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
+                // Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
+                // Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
+
+            });
+
+            // Schedule Routes
+            Route::group(['prefix' => 'video'], function () {
+                Route::get('/', [App\Http\Controllers\AttentionController::class, 'index'])->name('video.courses');
+                Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
+                Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
+                Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
+                Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
+                Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
+                Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
+
+            });
 
         });
 

@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->string('status')->default('pending');
+        
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
+            $table->string("title");
+            $table->timestamps();
         });
     }
 
@@ -21,9 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('applications', function (Blueprint $table) {
-            $table->dropColumn('status');
-        });
+        Schema::dropIfExists('tags');
     }
 };
-    

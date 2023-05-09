@@ -46,62 +46,72 @@
                             </div>
                         </div>
 
-                        <div class="table-responsive">
-                            <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="user-datatable">
+                        @if (count($users))
+                            
+                            <div class="table-responsive">
+                                <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="user-datatable">
 
-                                <thead class="table-light">
-                                <tr>
-                                    <th style="width: 20px;">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customCheck">
-                                            <label class="form-check-label" for="customCheck">&nbsp;</label>
-                                        </div>
-                                    </th>
-                                    <th>User</th>
-                                    <th>Role</th>
-                                    <th>Email</th>
-                                    <th>Create Date</th>
-                                    <th style="width: 75px;">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 20px;">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="customCheck">
+                                                <label class="form-check-label" for="customCheck">&nbsp;</label>
+                                            </div>
+                                        </th>
+                                        <th>User</th>
+                                        <th>Role</th>
+                                        <th>Email</th>
+                                        <th>Create Date</th>
+                                        <th style="width: 75px;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    @foreach($users as $user)
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="customCheck{{$user->id}}">
-                                                    <label class="form-check-label" for="customCheck{{$user->id}}">&nbsp;</label>
-                                                </div>
-                                            </td>
-                                            <td class="table-user">
-                                                <img src="{{ asset("assets/images/users/avatar-4.jpg") }}" alt="table-user" class="me-2 rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body fw-semibold">{{ $user->fullName }}</a>
-                                            </td>
-                                            <td> {{ $user->getRoleNames()->map(fn ($name) => __($name))->implode(', ') }}  </td>
-                                            <td> {{ $user->email }} </td>
-                                            <td> {{ $user->created_at }} </td>
-                                            <td>
-                                                @can(["edit users"])
-                                                    <a href="javascript:void(0);" class="action-icon"
-                                                       data-bs-toggle="modal" data-bs-target="#edit-user-modal"
-                                                    > <i class="mdi mdi-square-edit-outline"></i></a>
-                                                @endcan
-                                                @can(["delete users"])
-                                                    <a class="action-icon"
-                                                       href="{{ route('users.destroy', $user->id) }}"
-                                                       data-bs-toggle="modal" data-bs-target="#delete-user-modal"
-                                                    > <i class="mdi mdi-delete"></i></a>
-                                                @endcan
+                                        @foreach($users as $user)
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="customCheck{{$user->id}}">
+                                                        <label class="form-check-label" for="customCheck{{$user->id}}">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td class="table-user">
+                                                    <img src="{{ asset("assets/images/users/avatar-4.jpg") }}" alt="table-user" class="me-2 rounded-circle">
+                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{ $user->fullName }}</a>
+                                                </td>
+                                                <td> {{ $user->getRoleNames()->map(fn ($name) => __($name))->implode(', ') }}  </td>
+                                                <td> {{ $user->email }} </td>
+                                                <td> {{ $user->created_at }} </td>
+                                                <td>
+                                                    @can(["edit users"])
+                                                        <a href="javascript:void(0);" class="action-icon"
+                                                        data-bs-toggle="modal" data-bs-target="#edit-user-modal"
+                                                        > <i class="mdi mdi-square-edit-outline"></i></a>
+                                                    @endcan
+                                                    @can(["delete users"])
+                                                        <a class="action-icon"
+                                                        href="{{ route('users.destroy', $user->id) }}"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-user-modal"
+                                                        > <i class="mdi mdi-delete"></i></a>
+                                                    @endcan
 
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
 
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        @else
+                            <div class="alert alert-info" role="alert">
+                                <i class="mdi mdi-alert-circle-outline me-2"></i> No users found!
+                            </div>
+                        @endif
+
+
                     </div>
                 </div>
             </div>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->foreignId("group_id")->nullable()->constrained("groups")->nullOnDelete();
             $table->timestamps();
         });
     }

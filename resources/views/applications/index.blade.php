@@ -28,63 +28,75 @@
                 <div class="card">
                     <div class="card-body">
                     
+                        @if (count($applications) > 0)
+                            
 
-                        <div class="table-responsive">
-                            <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="user-datatable">
+                            <div class="table-responsive">
+                                <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="user-datatable">
 
-                                <thead class="table-light">
-                                <tr>
-                                    <th style="width: 20px;">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="customCheck">
-                                            <label class="form-check-label" for="customCheck">&nbsp;</label>
-                                        </div>
-                                    </th>
-                                    <th>User</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>App. Sent Date</th>
-                                    <th style="width: 75px;">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 20px;">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="customCheck">
+                                                <label class="form-check-label" for="customCheck">&nbsp;</label>
+                                            </div>
+                                        </th>
+                                        <th>User</th>
+                                        <th>Phone</th>
+                                        <th>Email</th>
+                                        <th>App. Sent Date</th>
+                                        <th style="width: 75px;">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
-                                    @foreach($applications as $application)
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <input type="checkbox" class="form-check-input" id="customCheck{{$application->id}}">
-                                                    <label class="form-check-label" for="customCheck{{$application->id}}">&nbsp;</label>
-                                                </div>
-                                            </td>
-                                            <td class="table-user">
-                                                <img src="{{ asset("assets/images/users/avatar-4.jpg") }}" alt="table-user" class="me-2 rounded-circle">
-                                                <a href="javascript:void(0);" class="text-body fw-semibold">{{ $application->fullName }}</a>
-                                            </td>
-                                            <td> {{ $application->phone }}  </td>
-                                            <td> {{ $application->email }} </td>
-                                            <td> {{ $application->created_at }} </td>
-                                            <td>
-                                                @can(["edit users"])
-                                                    <a href="{{ route('applications.update', $application->id) }}" class="action-icon"
-                                                       data-bs-toggle="modal" data-bs-target="#accept-modal"
-                                                    > <i class="mdi mdi-check text-success"></i></a>
-                                                @endcan
-                                                @can(["delete users"])
-                                                    <a class="action-icon"
-                                                       href="{{ route('applications.destroy', $application->id) }}"
-                                                       data-bs-toggle="modal" data-bs-target="#delete-modal"
-                                                    > <i class="mdi mdi-close text-danger"></i></a>
-                                                @endcan
+                                        @foreach($applications as $application)
+                                            <tr>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="customCheck{{$application->id}}">
+                                                        <label class="form-check-label" for="customCheck{{$application->id}}">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td class="table-user">
+                                                    <img src="{{ asset("assets/images/users/avatar-4.jpg") }}" alt="table-user" class="me-2 rounded-circle">
+                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{ $application->fullName }}</a>
+                                                </td>
+                                                <td> {{ $application->phone }}  </td>
+                                                <td> {{ $application->email }} </td>
+                                                <td> {{ $application->created_at }} </td>
+                                                <td>
+                                                    @can(["edit users"])
+                                                        <a href="{{ route('applications.update', $application->id) }}" class="action-icon"
+                                                        data-bs-toggle="modal" data-bs-target="#accept-modal"
+                                                        > <i class="mdi mdi-check text-success"></i></a>
+                                                    @endcan
+                                                    @can(["delete users"])
+                                                        <a class="action-icon"
+                                                        href="{{ route('applications.destroy', $application->id) }}"
+                                                        data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                                        > <i class="mdi mdi-close text-danger"></i></a>
+                                                    @endcan
 
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                </td>
+                                            </tr>
+                                        @endforeach
 
 
-                                </tbody>
-                            </table>
-                        </div>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        @else
+                                
+                                <div class="alert alert-info" role="alert">
+                                    <i class="mdi mdi-alert-circle-outline me-2"></i> No applications found!
+                                </div>
+
+                        @endif
+
+
                     </div>
                 </div>
             </div>

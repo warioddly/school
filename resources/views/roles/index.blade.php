@@ -38,7 +38,9 @@
                         </div>
 
                         @if (count($roles) == 0)
-                            <h2 class="text-center">Roles is empty</h2>
+                            <div class="alert alert-info" role="alert">
+                                <i class="mdi mdi-alert-circle-outline me-2"></i> No roles found!
+                            </div>
                         @else
                             <div class="table-responsive">
                                 <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="role-datatable">

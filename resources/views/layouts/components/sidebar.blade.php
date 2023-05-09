@@ -65,32 +65,34 @@
             <div class="collapse" id="sidebarEcommerce">
                 <ul class="side-nav-second-level">
 
+                    <li><a href="{{ route('courses.materials') }}">{{ __('Materials') }}</a></li>
+
                     <li><a href="{{ route('courses') }}"> {{ __('Video Courses') }} </a></li>
 
-                    <li><a href="#">Products Details</a></li>
+                    <li><a href="#">{{ __('Tags') }}</a></li>
 
-                    <li><a href="#">Orders</a></li>
-
-                    <li><a href="#">Order Details</a></li>
+                    <li><a href="#">{{ __('Documents') }}</a></li>
 
                 </ul>
             </div>
         </li>
 
         <li class="side-nav-item">
+            
             <a data-bs-toggle="collapse" href="#sidebarTasks" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
                 <i class="uil-clipboard-alt"></i>
-                <span> Tasks </span>
+                <span> School </span>
                 <span class="menu-arrow"></span>
             </a>
+
             <div class="collapse" id="sidebarTasks">
                 <ul class="side-nav-second-level">
 
-                    <li><a href="#">List</a></li>
+                    <li><a href="#">Groups</a></li>
 
-                    <li><a href="#">Details</a></li>
+                    <li><a href="#">Students</a></li>
 
-                    <li><a href="#">Kanban Board</a></li>
+                    <li><a href="#">Teachers</a></li>
 
                 </ul>
             </div>

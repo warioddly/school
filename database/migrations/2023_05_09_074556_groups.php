@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('video_courses', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
             $table->string("title");
             $table->text("description");
-            $table->string("badge")->nullable();
-            $table->string("color")->default("#727cf5");
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('video_courses');
+        Schema::dropIfExists('groups');
     }
 };
