@@ -24,7 +24,6 @@ Route::post('/applications/register', [App\Http\Controllers\ApplicationControlle
 
 Route::group(['middleware' => 'auth'], function () {
 
-
     // Home Routes
     Route::group(['prefix' => 'dashboard'], function () {
         Route::get('/', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
@@ -73,29 +72,15 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'courses'], function() {
 
-            // Schedule Routes
-            Route::group(['prefix' => 'materials'], function () {
-                Route::get('/', [App\Http\Controllers\CourseController::class, 'index'])->name('courses.materials');
-                // Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
-                // Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
-                // Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
-                // Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
-                // Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
-                // Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
+            Route::get('/materials', [App\Http\Controllers\CourseController::class, 'index'])->name('courses.materials');
+            Route::get('/video', [App\Http\Controllers\CourseController::class, 'index'])->name('courses.video.materials');
+            Route::get('/create', [App\Http\Controllers\CourseController::class, 'create'])->name('materials.create');
+            // Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
+            // Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
+            // Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
+            // Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
+            // Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
 
-            });
-
-            // Schedule Routes
-            Route::group(['prefix' => 'video'], function () {
-                Route::get('/', [App\Http\Controllers\CourseController::class, 'videoMaterials'])->name('video.courses');
-                // Route::get('/create', [App\Http\Controllers\AttentionController::class, 'create'])->name('video.courses.create');
-                // Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
-                // Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
-                // Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');
-                // Route::put('/update/{id}', [App\Http\Controllers\AttentionController::class, 'update'])->name('video.courses.update');
-                // Route::delete('/delete/{id}', [App\Http\Controllers\AttentionController::class, 'destroy'])->name('video.courses.destroy');
-
-            });
 
         });
 
@@ -113,6 +98,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'notifications'], function () {
             Route::get('/', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
             Route::get('/create', [App\Http\Controllers\ScheduleController::class, 'create'])->name('notifications.create');
+        });
+
+
+
+        // Document Routes
+        Route::group(['prefix' => 'documents'], function () {
+            Route::get('/', [App\Http\Controllers\DocumentController::class, 'index'])->name('documents');
+            Route::get('/create', [App\Http\Controllers\DocumentController::class, 'create'])->name('documents.create');
+            Route::post('/store', [App\Http\Controllers\DocumentController::class, 'store'])->name('documents.store');
         });
 
 
