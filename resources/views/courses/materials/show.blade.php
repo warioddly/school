@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Show Attention')
+@section('title', 'Show Material')
 
 @section('content')
 
@@ -11,110 +11,200 @@
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                        <li class="breadcrumb-item active">Project Details</li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tasks</a></li>
+                        <li class="breadcrumb-item active">Task Detail</li>
                     </ol>
                 </div>
-                
-                <h4 class="page-title">Attention</h4>
-
+                <h4 class="page-title">Material Detail</h4>
             </div>
         </div>
-    </div>
-
+    </div>     
 
     <div class="row">
-        <div class="col-12">
-         
+        <div class="col-xxl-8 col-xl-7">
+            <!-- project card -->
             <div class="card d-block">
                 <div class="card-body">
-
-
-                    <div class="dropdown float-end">
-                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="dripicons-dots-3"></i>
+                    <div class="dropdown card-widgets">
+                        <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class='uil uil-ellipsis-h'></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
-                        
-                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-pencil me-1"></i>Edit</a>
-                
-                            <a href="javascript:void(0);" class="dropdown-item"><i class="mdi mdi-delete me-1"></i>Delete</a>
-                       
-                        </div>
-                    </div>
-             
-
-                    <h3 class="mt-0"> {{ $attention->title }} </h3>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <i class='uil uil-file-upload me-1'></i>Attachment
+                            </a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <i class='uil uil-edit me-1'></i>Edit
+                            </a>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item">
+                                <i class='uil uil-file-copy-alt me-1'></i>Mark as Duplicate
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <!-- item-->
+                            <a href="javascript:void(0);" class="dropdown-item text-danger">
+                                <i class='uil uil-trash-alt me-1'></i>Delete
+                            </a>
+                        </div> <!-- end dropdown menu-->
+                    </div> <!-- end dropdown-->
                     
-                    <div class="badge bg-secondary text-light mb-3" style="background-color: {{ $attention->color }} !important">{{ $attention->badge }}</div>
-
-
-                    <h5>Attention Overview:</h5>
-
+                    <div class="form-check float-start">
+                        <input type="checkbox" class="form-check-input" id="completedCheck">
+                        <label class="form-check-label" for="completedCheck">
+                            Mark as completed
+                        </label>
+                    </div> <!-- end form-check-->
                     
-                    <p class="text-muted mb-4">
-                        {{ $attention->description }}
-                    </p>
+                    <div class="clearfix"></div>
 
+                    <h3 class="mt-3">{{ $course->title }}</h3>
 
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="mb-4">
-                                <h5>Created Date</h5>
-                                <p>{{ date('j F Y', strtotime($attention->createdAt)) }} <small class="text-muted">{{ date('g:i A', strtotime($attention->createdAt)) }}</small></p>
+                        <div class="col-6">
+                            <!-- assignee -->
+                            <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase">Assigned To</p>
+                            <div class="d-flex">
+                                <img src="assets/images/users/avatar-9.jpg" alt="Arya S" class="rounded-circle me-2" height="24" />
+                                <div>
+                                    <h5 class="mt-1 font-14">
+                                        Arya Stark
+                                    </h5>
+                                </div>
                             </div>
-                        </div>
+                            <!-- end assignee -->
+                        </div> <!-- end col -->
+
+                        <div class="col-6">
+                            <!-- start due date -->
+                            <p class="mt-2 mb-1 text-muted fw-bold font-12 text-uppercase">Due Date</p>
+                            <div class="d-flex">
+                                <i class='uil uil-schedule font-18 text-success me-1'></i>
+                                <div>
+                                    <h5 class="mt-1 font-14">
+                                        Today 10am
+                                    </h5>
+                                </div>
+                            </div>
+                            <!-- end due date -->
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+
+
+                    <h5 class="mt-3">Overview:</h5>
+
+                    <p class="text-muted mb-4">{!! $course->description !!}</p>
+
+                    <!-- start sub tasks/checklists -->
+                    <h5 class="mt-4 mb-2 font-16">Checklists/Sub-tasks</h5>
+                    <div class="form-check mt-1">
+                        <input type="checkbox" class="form-check-input" id="checklist1">
+                        <label class="form-check-label strikethrough" for="checklist1">
+                            Find out the old contract documents
+                        </label>
                     </div>
+                    
+                    <div class="form-check mt-1">
+                        <input type="checkbox" class="form-check-input" id="checklist2">
+                        <label class="form-check-label strikethrough" for="checklist2">
+                            Organize meeting sales associates to understand need in detail
+                        </label>
+                    </div>
+                    
+                    <div class="form-check mt-1">
+                        <input type="checkbox" class="form-check-input" id="checklist3">
+                        <label class="form-check-label strikethrough" for="checklist3">
+                            Make sure to cover every small details
+                        </label>
+                    </div>
+                    <!-- end sub tasks/checklists -->
 
+                </div> <!-- end card-body-->
+                
+            </div> <!-- end card-->
 
-                </div>
+  
+        </div> <!-- end col -->
 
-            </div> 
+        <div class="col-xxl-4 col-xl-5">
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="mt-0 mb-3">Comments (258)</h4>
+                    <h5 class="card-title mb-3">Attachments</h5>
 
-                    <textarea class="form-control form-control-light mb-2" placeholder="Write message" id="example-textarea" rows="3"></textarea>
-                    <div class="text-end">
-                        <div class="btn-group mb-2">
-                            <button type="button" class="btn btn-link btn-sm text-muted font-18"><i class="dripicons-paperclip"></i></button>
-                        </div>
-                        <div class="btn-group mb-2 ms-2">
-                            <button type="button" class="btn btn-primary btn-sm">Submit</button>
-                        </div>
-                    </div>
-
-                    <div class="d-flex align-items-start mt-2">
-                        <img class="me-3 avatar-sm rounded-circle" src="assets/images/users/avatar-3.jpg" alt="Generic placeholder image">
-                        <div class="w-100 overflow-hidden">
-                            <h5 class="mt-0">Jeremy Tomlinson</h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                            vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
-                            in faucibus.
-
-                            <div class="d-flex align-items-start mt-3">
-                                <a class="pe-3" href="#">
-                                    <img src="assets/images/users/avatar-4.jpg" class="avatar-sm rounded-circle" alt="Generic placeholder image">
-                                </a>
-                                <div class="w-100 overflow-hidden">
-                                    <h5 class="mt-0">Kathleen Thomas</h5>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in
-                                    vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
-                                    felis in faucibus.
+                    <div class="card my-1 shadow-none border">
+                        <div class="p-2">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar-sm">
+                                        <span class="avatar-title rounded">
+                                            .ZIP
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col ps-0">
+                                    <a href="javascript:void(0);" class="text-muted fw-bold">Hyper-admin-design.zip</a>
+                                    <p class="mb-0">2.3 MB</p>
+                                </div>
+                                <div class="col-auto">
+                                    <!-- Button -->
+                                    <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
+                                        <i class="dripicons-download"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-center mt-2">
-                        <a href="javascript:void(0);" class="text-danger">Load more </a>
+                    <div class="card mb-1 shadow-none border">
+                        <div class="p-2">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <img src="assets/images/projects/project-1.jpg" class="avatar-sm rounded" alt="file-image" />
+                                </div>
+                                <div class="col ps-0">
+                                    <a href="javascript:void(0);" class="text-muted fw-bold">Dashboard-design.jpg</a>
+                                    <p class="mb-0">3.25 MB</p>
+                                </div>
+                                <div class="col-auto">
+                                    <!-- Button -->
+                                    <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
+                                        <i class="dripicons-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div> <!-- end card-body-->
+
+                    <div class="card mb-0 shadow-none border">
+                        <div class="p-2">
+                            <div class="row align-items-center">
+                                <div class="col-auto">
+                                    <div class="avatar-sm">
+                                        <span class="avatar-title bg-secondary text-light rounded">
+                                            .MP4
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col ps-0">
+                                    <a href="javascript:void(0);" class="text-muted fw-bold">Admin-bug-report.mp4</a>
+                                    <p class="mb-0">7.05 MB</p>
+                                </div>
+                                <div class="col-auto">
+                                    <!-- Button -->
+                                    <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
+                                        <i class="dripicons-download"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-
-        </div> 
-
+        </div>
     </div>
+    
 
 @endsection

@@ -14,16 +14,16 @@
         <li class="side-nav-title side-nav-item">Navigation</li>
 
         <li class="side-nav-item">
-            <a href="{{ route("home") }}" class="side-nav-link">
+            <a href="{{ route("dashboard") }}" class="side-nav-link">
                 <i class="uil-home-alt"></i>
                 <span> Home </span>
             </a>
         </li>
 
-        <li class="side-nav-item">
+        {{-- <li class="side-nav-item">
             <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                 <i class="uil-chart"></i>
-{{--                <span class="badge bg-info rounded-pill float-end">4</span>--}}
+                <span class="badge bg-info rounded-pill float-end">4</span>
                 <span class="menu-arrow"></span>
 
                 <span> Dashboards </span>
@@ -36,7 +36,7 @@
 
                 </ul>
             </div>
-        </li>
+        </li> --}}
 
         <li class="side-nav-item">
             <a href="{{ route("attentions") }}" class="side-nav-link">
@@ -67,7 +67,7 @@
 
                     <li><a href="{{ route('courses.materials') }}">{{ __('Materials') }}</a></li>
 
-                    <li><a href="{{ route('video.courses') }}"> {{ __('Video Courses') }} </a></li>
+                    <li><a href="{{ route('courses.video.materials') }}"> {{ __('Video Courses') }} </a></li>
 
                     <li><a href="{{ route('tags') }}">{{ __('Tags') }}</a></li>
 
