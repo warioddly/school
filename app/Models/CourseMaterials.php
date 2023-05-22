@@ -25,7 +25,7 @@ class CourseMaterials extends Model
 
     public function tag()
     {
-        return $this->belongsTo(Tag::class, 'tag_id');
+        return $this->belongsTo(Tags::class, 'tag_id');
     }
 
 }

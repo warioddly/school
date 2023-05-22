@@ -74,7 +74,9 @@ Route::group(['middleware' => 'auth'], function () {
 
             Route::get('/materials', [App\Http\Controllers\CourseController::class, 'index'])->name('courses.materials');
             Route::get('/video', [App\Http\Controllers\CourseController::class, 'index'])->name('courses.video.materials');
-            Route::get('/create', [App\Http\Controllers\CourseController::class, 'create'])->name('materials.create');
+            Route::get('/create', [App\Http\Controllers\CourseController::class, 'create'])->name('courses.create');
+            Route::post('/store', [App\Http\Controllers\CourseController::class, 'store'])->name('courses.store');
+            Route::get('/{courses}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
             // Route::get('/edit/{id}', [App\Http\Controllers\AttentionController::class, 'edit'])->name('video.courses.edit');
             // Route::get('/show/{id}', [App\Http\Controllers\AttentionController::class, 'show'])->name('video.courses.show');
             // Route::post('/store', [App\Http\Controllers\AttentionController::class, 'store'])->name('video.courses.store');

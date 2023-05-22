@@ -28,7 +28,7 @@
         <div class="col-sm-4">
 
 {{--            @canany(["create attention"])--}}
-                <a href="{{ route('materials.create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i> Create Material</a>
+                <a href="{{ route('courses.create') }}" class="btn btn-danger rounded-pill mb-3"><i class="mdi mdi-plus"></i>Create Material</a>
 {{--            @endcanany--}}
 
         </div>

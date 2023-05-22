@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Show Attention')
+@section('title', 'Show Material')
 
 @section('content')
 
@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item active">Task Detail</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Task Detail</h4>
+                <h4 class="page-title">Material Detail</h4>
             </div>
         </div>
     </div>     
@@ -59,7 +59,7 @@
                     
                     <div class="clearfix"></div>
 
-                    <h3 class="mt-3">Draft the new contract document for sales team</h3>
+                    <h3 class="mt-3">{{ $course->title }}</h3>
 
                     <div class="row">
                         <div class="col-6">
@@ -94,9 +94,7 @@
 
                     <h5 class="mt-3">Overview:</h5>
 
-                    <p class="text-muted mb-4">
-                        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up.
-                    </p>
+                    <p class="text-muted mb-4">{!! $course->description !!}</p>
 
                     <!-- start sub tasks/checklists -->
                     <h5 class="mt-4 mb-2 font-16">Checklists/Sub-tasks</h5>
@@ -126,74 +124,7 @@
                 
             </div> <!-- end card-->
 
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="my-1">Comments (51)</h4>
-                </div>
-                <div class="card-body">
-                    
-                    <div class="d-flex">
-                        <img class="me-2 rounded-circle" src="assets/images/users/avatar-3.jpg"
-                            alt="Generic placeholder image" height="32">
-                        <div class="w-100">
-                            <h5 class="mt-0">Jeremy Tomlinson <small class="text-muted float-end">5 hours ago</small></h5>
-                            Nice work, makes me think of The Money Pit.
-
-                            <br/>
-                            <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i
-                                class="mdi mdi-reply"></i> Reply</a>
-
-                            <div class="d-flex mt-3">
-                                <a class="pe-2" href="#">
-                                    <img src="assets/images/users/avatar-4.jpg" class="rounded-circle"
-                                        alt="Generic placeholder image" height="32">
-                                </a>
-                                <div class="w-100">
-                                    <h5 class="mt-0">Thelma Fridley <small class="text-muted float-end">3 hours ago</small></h5>
-                                    i'm in the middle of a timelapse animation myself! (Very different though.) Awesome stuff.
-
-                                    <br/>
-                                    <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2">
-                                        <i class="mdi mdi-reply"></i> Reply
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex mt-3">
-                        <img class="me-2 rounded-circle" src="assets/images/users/avatar-5.jpg"
-                            alt="Generic placeholder image" height="32">
-                        <div class="w-100">
-                            <h5 class="mt-0">Kevin Martinez <small class="text-muted float-end">1 day ago</small></h5>
-                            It would be very nice to have.
-
-                            <br/>
-                            <a href="javascript: void(0);" class="text-muted font-13 d-inline-block mt-2"><i
-                                class="mdi mdi-reply"></i> Reply</a>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-2">
-                        <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-spin mdi-loading me-1"></i> Load more </a>
-                    </div>
-
-                    <div class="border rounded mt-4">
-                        <form action="#" class="comment-area-box">
-                            <textarea rows="3" class="form-control border-0 resize-none" placeholder="Your comment..."></textarea>
-                            <div class="p-2 bg-light d-flex justify-content-between align-items-center">
-                                <div>
-                                    <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-upload'></i></a>
-                                    <a href="#" class="btn btn-sm px-1 btn-light"><i class='mdi mdi-at'></i></a>
-                                </div>
-                                <button type="submit" class="btn btn-sm btn-success"><i class='uil uil-message me-1'></i>Submit</button>
-                            </div>
-                        </form>
-                    </div> <!-- end .border-->
-
-                </div> <!-- end card-body-->
-            </div>
-            <!-- end card-->
+  
         </div> <!-- end col -->
 
         <div class="col-xxl-4 col-xl-5">
@@ -201,46 +132,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title mb-3">Attachments</h5>
-
-                    <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                        data-upload-preview-template="#uploadPreviewTemplate">
-                        <div class="fallback">
-                            <input name="file" type="file" />
-                        </div>
-
-                        <div class="dz-message needsclick">
-                            <i class="h3 text-muted dripicons-cloud-upload"></i>
-                            <h4>Drop files here or click to upload.</h4>
-                        </div>
-                    </form>
-
-                    <!-- Preview -->
-                    <div class="dropzone-previews mt-3" id="file-previews"></div>
-
-                    <!-- file preview template -->
-                    <div class="d-none" id="uploadPreviewTemplate">
-                        <div class="card mt-1 mb-0 shadow-none border">
-                            <div class="p-2">
-                                <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-                                    </div>
-                                    <div class="col ps-0">
-                                        <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
-                                        <p class="mb-0" data-dz-size></p>
-                                    </div>
-                                    <div class="col-auto">
-                                        <!-- Button -->
-                                        <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                            <i class="dripicons-cross"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end file preview template -->
-
 
                     <div class="card my-1 shadow-none border">
                         <div class="p-2">

@@ -34,10 +34,10 @@
             </h4>
 
             
-            <div class="badge bg-success mb-3"> {{ $item->tag }}</div>
+            <div class="badge bg-success mb-3"> {{ $item->tag->title }}</div>
 
 
-            <p class="text-muted font-13 mb-3">{{ Str::substr($item->description, 0, 150) }}...<a href="{{ route("attentions.show", $item->id) }}" class="fw-bold text-muted">view more</a>
+            <p class="text-muted font-13 mb-3">{!! Str::substr($item->description, 0, 20) !!}...<a href="{{ route("courses.show", $item->id) }}" class="fw-bold text-muted">view more</a>
             </p>
 
        

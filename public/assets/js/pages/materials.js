@@ -16,3 +16,9 @@ var quill = new Quill("#snow-editor", {
     },
 })
 
+var hiddenInput = document.querySelector('#hidden-desciprtion');
+
+quill.on('text-change', function() {
+    var content = quill.root.innerHTML;
+    hiddenInput.value = content;
+});
