@@ -13,17 +13,4 @@ class DashboardController extends Controller
         return view('home.index');
     }
 
-
-    public function analytics(): Renderable
-    {
-        return view('home.analytics');
-    }
-
-
-    public function projects(): Renderable
-    {
-        return view('home.projects');
-    }
-
-
 }

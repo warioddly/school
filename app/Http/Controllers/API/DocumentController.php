@@ -12,8 +12,10 @@ class DocumentController extends Controller
 {
 
 
-    public function upload($file)
+    public function upload()
     {
+        $file = \request()->file('file');
+
         $fileName = $file->getClientOriginalName();
         $fileType = $file->getClientMimeType();
         $fileSize = $file->getSize();
@@ -30,8 +32,7 @@ class DocumentController extends Controller
                 'path' => $filePath
             ]
         );
-       
-        dd($document);
+
         return $filePath;
     }
 

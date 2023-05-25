@@ -32,7 +32,7 @@ class RoleController extends Controller
     public function destroy(int $id): RedirectResponse
     {
 
-        if ($id == 1) return redirect()->back()->withErrors(['You can\'t delete this system role']);
+        if (in_array($id, [1, 2, 3])) return redirect()->back()->withErrors(['You can\'t delete this system role']);
 
         $role = Role::query()->findOrFail($id);
 

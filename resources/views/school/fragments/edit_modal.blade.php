@@ -12,18 +12,13 @@
                 <div class="modal-body">
 
                     @csrf
-                    @method('PATCH')
+                    @method('POST   ')
 
                     <div class="mb-3">
-                        <label for="edit-role" class="form-label">Role title</label>
-                        <input class="form-control" type="text" id="edit-role" name="name" required placeholder="Input role title...">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="edit-role" class="form-label">Role</label>
+                        <label for="edit-role" class="form-label">Group</label>
                         <select class="form-select" id="edit-role">
-                            @foreach($roles as $role)
-                                <option value="{{ $role->id }}">{{ __($role->name) }}</option>
+                            @foreach($groups as $group)
+                                <option value="{{ $group->id }}">{{ __($group->title) }}</option>
                             @endforeach
                         </select>
                     </div>

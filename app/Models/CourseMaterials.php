@@ -13,6 +13,9 @@ class CourseMaterials extends Model
         'title',
         'tag_id',
         'description',
+        'content',
+        'views',
+        'author_id'
     ];
 
 
@@ -26,6 +29,18 @@ class CourseMaterials extends Model
     public function tag()
     {
         return $this->belongsTo(Tags::class, 'tag_id');
+    }
+
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+
+    public function getAuthorNameAttribute()
+    {
+        return $this->author->name . " " .  $this->author->surname;
     }
 
 }

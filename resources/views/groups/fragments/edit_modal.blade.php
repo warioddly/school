@@ -1,4 +1,4 @@
-<div class="modal fade" id="edit-modal"
+<div class="modal fade" id="edit-group-modal"
      data-bs-backdrop="static" data-bs-keyboard="false"
      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -12,21 +12,23 @@
                 <div class="modal-body">
 
                     @csrf
-                    @method('PATCH')
+                    @method('POST')
 
-                    <div class="mb-3">
-                        <label for="edit-role" class="form-label">Role title</label>
-                        <input class="form-control" type="text" id="edit-role" name="name" required placeholder="Input role title...">
+                    <div class="row row-cols-12">
+
+                        <div class="mb-3">
+                            <label for="edit-title" class="form-label">Title</label>
+                            <input class="form-control" type="text" id="edit-title" name="title" required placeholder="Input title">
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="edit-description" class="form-label">Description</label>
+                            <input class="form-control" type="text" id="edit-description" name="description" required placeholder="Input description">
+                        </div>
+
                     </div>
 
-                    <div class="mb-3">
-                        <label for="edit-role" class="form-label">Role</label>
-                        <select class="form-select" id="edit-role">
-                            @foreach($roles as $role)
-                                <option value="{{ $role->id }}">{{ __($role->name) }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
                 </div>
                 <div class="modal-footer">

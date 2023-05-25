@@ -24,7 +24,7 @@
     @include('layouts.fragments.alerts')
 
 
-    <div class="row mb-2">
+    <div class="row mb-2 justify-content-between">
         <div class="col-sm-4">
 
 {{--            @canany(["create attention"])--}}
@@ -32,36 +32,33 @@
 {{--            @endcanany--}}
 
         </div>
+        <div class="col-4">
+            <form action="{{ route('courses.search') }}" method="post">
+                @csrf
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search..." name="search" id="course-search" value="{{ $search }}">
+                    <button class="input-group-text btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
 
-        {{-- <div class="col-sm-8">
-            <div class="text-sm-end">
-                <div class="btn-group mb-3">
-                    <button type="button" class="btn btn-primary">All</button>
-                </div>
-                <div class="btn-group mb-3 ms-1">
-                    <button type="button" class="btn btn-light">Ongoing</button>
-                    <button type="button" class="btn btn-light">Finished</button>
-                </div>
-                <div class="btn-group mb-3 ms-2 d-none d-sm-inline-block">
-                    <button type="button" class="btn btn-secondary"><i class="dripicons-view-apps"></i></button>
-                </div>
-                <div class="btn-group mb-3 d-none d-sm-inline-block">
-                    <button type="button" class="btn btn-link text-muted"><i class="dripicons-checklist"></i></button>
-                </div>
-            </div>
-        </div> --}}
 
     </div>
 
-    
+
     <div class="row">
 
-        @foreach ($materials as $material)
+        @forelse($materials as $material)
+            @include('courses.fragments.card', ['item' => $material])
+        @empty
+            <h4 class="text-center">Material not found</h4>
+        @endforelse
 
-            @include('courses.materials.fragments.card', ['item' => $material])
-            
-        @endforeach
+    </div>
 
+
+    <div>
+        {{ $materials->links() }}
     </div>
 
 

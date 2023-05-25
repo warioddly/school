@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Groups extends Model
+class StudentGroup extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'description',
+        'user_id',
+        'group_id',
     ];
 
 
@@ -22,6 +22,12 @@ class Groups extends Model
 
 
     public function teachers()
+    {
+        return $this->hasMany(User::class);
+    }
+
+
+    public function schedule()
     {
         return $this->hasMany(User::class);
     }
