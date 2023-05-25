@@ -65,9 +65,9 @@
             <div class="collapse" id="sidebarEcommerce">
                 <ul class="side-nav-second-level">
 
-                    <li><a href="{{ route('courses.materials') }}">{{ __('Materials') }}</a></li>
+                    <li><a href="{{ route('courses') }}">{{ __('Materials') }}</a></li>
 
-                    <li><a href="{{ route('courses.video.materials') }}"> {{ __('Video Courses') }} </a></li>
+{{--                    <li><a href="{{ route('courses.video.materials') }}"> {{ __('Video Courses') }} </a></li>--}}
 
                     <li><a href="{{ route('tags') }}">{{ __('Tags') }}</a></li>
 
@@ -78,7 +78,7 @@
         </li>
 
         <li class="side-nav-item">
-            
+
             <a data-bs-toggle="collapse" href="#sidebarTasks" aria-expanded="false" aria-controls="sidebarTasks" class="side-nav-link">
                 <i class="uil-clipboard-alt"></i>
                 <span> School </span>
@@ -88,11 +88,11 @@
             <div class="collapse" id="sidebarTasks">
                 <ul class="side-nav-second-level">
 
-                    <li><a href="#">Groups</a></li>
+                    <li><a href="{{ route('groups') }}">Groups</a></li>
 
-                    <li><a href="#">Students</a></li>
+                    <li><a href="{{ route('school.students') }}">Students</a></li>
 
-                    <li><a href="#">Teachers</a></li>
+                    <li><a href="{{ route('school.teachers') }}">Teachers</a></li>
 
                 </ul>
             </div>

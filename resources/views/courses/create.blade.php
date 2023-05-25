@@ -26,7 +26,7 @@
 
     @include('layouts.fragments.alerts')
 
-           
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -40,22 +40,29 @@
 
                             <div class="col-xl-8">
 
-                                <input type="hidden" name="description" id="hidden-desciprtion">
+                                <input type="hidden" name="content" id="hidden-content">
                                 <input type="hidden" name="files[]" id='hidden-files'>
-    
+
                                 <div class="mb-3">
                                     <label for="projectname" class="form-label">Name</label>
-                                    <input type="text" id="projectname" class="form-control" name="title" placeholder="Enter project name">
+                                    <input type="text" id="projectname" class="form-control" name="title" placeholder="Enter material name">
                                 </div>
-    
+
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Name</label>
+                                    <input type="text" id="description" class="form-control" name="description" placeholder="Enter material description">
+                                </div>
+
+
                                 <div class="mb-3">
                                     <label for="project-overview" class="form-label">Overview</label>
                                     <div id="snow-editor" style="height: 300px;"></div>
                                 </div>
-    
+
                                 <div class="mb-0">
                                     <label for="project-overview" class="form-label">Tags</label>
-                                    
+
                                     <select class="form-control select2" data-toggle="select2" name="tag_id">
                                         @foreach ($tags as $key => $tag)
                                             @if (0 == $key) <option value="{{ $tag->id }}" selected>{{ $tag->title }}</option>
@@ -63,35 +70,35 @@
                                             @endif
                                         @endforeach
                                     </select>
-    
+
                                 </div>
-    
+
                             </div>
-    
-    
-                            {{-- <div class="col-xl-4">
-    
+
+
+                           <div class="col-xl-4">
+
                                 <div class="mb-3 mt-3 mt-xl-0">
-    
+
                                     <label for="projectname" class="mb-0">Materials</label>
-    
-                                    
-                                    <div action="/document/upload" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
+
+
+                                    <div action="/api/document/upload" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
                                         data-upload-preview-template="#uploadPreviewTemplate">
                                         <div class="fallback">
                                             <input name="file" type="file" />
                                         </div>
-    
+
                                         <div class="dz-message needsclick">
                                             <i class="h3 text-muted dripicons-cloud-upload"></i>
                                             <h4>Drop files here or click to upload.</h4>
                                         </div>
                                     </div>
-    
-    
+
+
                                     <div class="dropzone-previews mt-3" id="file-previews"></div>
-    
-    
+
+
                                     <div class="d-none" id="uploadPreviewTemplate">
                                         <div class="card mt-1 mb-0 shadow-none border">
                                             <div class="p-2">
@@ -113,64 +120,19 @@
                                             </div>
                                         </div>
                                     </div>
-    
-    
+
+
                                     <div id="document_attachments">
-    
-                                        <div class="card my-1 shadow-none border">
-                                            <div class="p-2">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar-sm">
-                                                            <span class="avatar-title rounded">
-                                                                .ZIP
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col ps-0">
-                                                        <a href="javascript:void(0);" class="text-muted fw-bold">Hyper-admin-design.zip</a>
-                                                        <p class="mb-0">2.3 MB</p>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <!-- Button -->
-                                                        <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
-                                                            <i class="dripicons-download"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-    
-                                        <div class="card mb-0 shadow-none border">
-                                            <div class="p-2">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="avatar-sm">
-                                                            <span class="avatar-title bg-secondary text-light rounded">
-                                                                .MP4
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col ps-0">
-                                                        <a href="javascript:void(0);" class="text-muted fw-bold">Admin-bug-report.mp4</a>
-                                                        <p class="mb-0">7.05 MB</p>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <!-- Button -->
-                                                        <a href="javascript:void(0);" class="btn btn-link btn-lg text-muted">
-                                                            <i class="dripicons-download"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-    
+
+                                        @include('components.cads.document-attachments')
+                                        @include('components.cads.document-attachments')
+                                        @include('components.cads.document-attachments')
                                     </div>
-    
-    
+
+
                                 </div>
-    
-                            </div>  --}}
+
+                            </div>
 
                         </div>
 
@@ -184,8 +146,8 @@
 
                     </form>
 
-                </div> 
-            </div> 
+                </div>
+            </div>
         </div>
     </div>
 
@@ -194,7 +156,6 @@
 
 
 @push('header_scripts')
-    <link href="{{ asset('assets/css/vendor/dropzone.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/vendor/quill.core.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/vendor/quill.bubble.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/vendor/quill.snow.css') }}" rel="stylesheet" type="text/css" />

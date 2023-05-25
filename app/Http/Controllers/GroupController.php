@@ -2,64 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StudentGroup;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Groups;
 
 class GroupController extends Controller
 {
+
     public function index()
     {
-        return view('group.index');
+        $groups = Groups::latest()->get();
+        return view('groups.index', compact('groups'));
     }
 
-    public function create()
-    {
-        return view('group.create');
-    }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
+
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
         ]);
 
-        $group = new Groups();
-        $group->name = $request->name;
-        $group->description = $request->description;
-        $group->save();
+        Groups::create($data);
 
-        return redirect()->route('group.index')->with('success', 'Group created successfully.');
+        return redirect()->route('groups')->with('success', 'Group created successfully.');
     }
 
 
     public function show($id)
     {
         $group = Groups::find($id);
-        return view('group.show', compact('group'));
-    }
 
+        $users = StudentGroup::query()->where('group_id', $id)->get();
 
-    public function edit($id)
-    {
-        $group = Groups::find($id);
-        return view('group.edit', compact('group'));
+        $students = User::query()->whereIn('id', $users->pluck('user_id'))->get();
+
+//        $teacher = User::query()->where('id', $group->teacher_id)->first();
+
+        return view('group.show', compact('group', 'students'));
     }
 
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
+
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
         ]);
 
-        $group = Groups::find($id);
-        $group->name = $request->name;
-        $group->description = $request->description;
-        $group->save();
+        Groups::whereId($id)->update($data);
 
-        return redirect()->route('group.index')->with('success', 'Group updated successfully.');
+        return redirect()->route('groups')->with('success', 'Group updated successfully.');
     }
 
 
@@ -68,9 +64,8 @@ class GroupController extends Controller
         $group = Groups::find($id);
         $group->delete();
 
-        return redirect()->route('group.index')->with('success', 'Group deleted successfully.');
+        return redirect()->route('groups')->with('success', 'Group deleted successfully.');
     }
-
 
 
 }

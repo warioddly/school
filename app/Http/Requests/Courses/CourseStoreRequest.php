@@ -23,7 +23,8 @@ class CourseStoreRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:255'],
-            'description' => ['required', 'string', 'max:1000'],
+            'content' => ['required', 'string', 'max:1000'],
+            'description' => ['required', 'string', 'max:400'],
             'files.*' => ['nullable'],
             'tag_id' => ['nullable', 'exists:tags,id'],
         ];

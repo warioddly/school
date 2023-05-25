@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->text("description");
+            $table->json('schedule')->nullable();
+            $table->unsignedBigInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
         });
     }
@@ -24,6 +25,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('schedules');
     }
+
+
 };
