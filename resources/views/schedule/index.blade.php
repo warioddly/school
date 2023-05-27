@@ -81,8 +81,8 @@
                                     </div>
                                 </div>
                             </form>
-                        </div> <!-- end modal-content-->
-                    </div> <!-- end modal dialog-->
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -92,9 +92,7 @@
 
 
 @push('header_scripts')
-
     <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
-
 @endpush
 
 @push('footer_scripts')

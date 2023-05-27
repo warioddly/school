@@ -3,10 +3,16 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use JetBrains\PhpStorm\Pure;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -49,9 +55,34 @@ class User extends Authenticatable
     ];
 
 
-    public function getFullNameAttribute(): string
+    #[Pure] public function getFullNameAttribute(): string
     {
         return $this->name . " " . Str::limit($this->surname, 1, '.') . " " . $this->patronymic ?: "";
     }
+
+
+    public function getGroupsAttribute(): Collection
+    {
+        return $this->groups()->get();
+    }
+
+
+
+    public function getGroupNamesAttribute(): \Illuminate\Support\Collection
+    {
+        return Groups::query()->whereIn('id', $this->groups()->pluck('group_id'))->get()->pluck('title');
+    }
+
+
+    public function groups(): HasMany|HasOne
+    {
+        if ($this->hasRole('student')) {
+            return $this->hasOne(StudentGroups::class, 'student_id');
+        }
+
+        return $this->hasMany(TeacherGroups::class, 'teacher_id');
+    }
+
+
 
 }

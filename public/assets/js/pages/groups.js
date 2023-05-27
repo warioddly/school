@@ -58,6 +58,25 @@ $(document).ready(function () {
     });
 
 
+    $("#group-students, #group-teachers").DataTable({
+        language: {
+            paginate: { previous: "<i class='mdi mdi-chevron-left'>", next: "<i class='mdi mdi-chevron-right'>" },
+            info: "Showing students _START_ to _END_ of _TOTAL_",
+            lengthMenu: 'Display <select class=\'form-select form-select-sm ms-1 me-1\'><option value="10">10</option><option value="20">20</option><option value="-1">All</option></select> students',
+        },
+        pageLength: 10,
+        columns: [
+            { orderable: !0 },
+            { orderable: !0 },
+            { orderable: !0 },
+            { orderable: !0 },
+            { orderable: !1 },
+        ],
+        select: { style: "multi" },
+        order: [[4, "desc"]],
+    });
+
+
     $('#delete-group-modal').on('show.bs.modal', function (event) {
         const button = $(event.relatedTarget);
         const form = $(this).find('form');

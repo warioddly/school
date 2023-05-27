@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -66,12 +68,11 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::group(['prefix' => 'groups'], function () {
-
-            Route::get('/', [\App\Http\Controllers\GroupController::class, 'index'])->name('groups');
-            Route::post('/store', [App\Http\Controllers\GroupController::class, 'store'])->name('groups.store');
-            Route::post('/edit/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('groups.edit');
-            Route::delete('/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('groups.destroy');
-
+            Route::get('/', [GroupController::class, 'index'])->name('groups');
+            Route::get('/show/{id}', [GroupController::class, 'show'])->name('groups.show');
+            Route::post('/store', [GroupController::class, 'store'])->name('groups.store');
+            Route::post('/edit/{id}', [GroupController::class, 'update'])->name('groups.edit');
+            Route::delete('/delete/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
         });
 
 
@@ -90,8 +91,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::group(['prefix' => 'school', 'middleware' => ['can:view users']], function () {
-            Route::get('/students', [App\Http\Controllers\SchoolController::class, 'students'])->name('school.students');
-            Route::get('/teachers', [App\Http\Controllers\SchoolController::class, 'teachers'])->name('school.teachers');
+            Route::get('/students', [SchoolController::class, 'students'])->name('school.students');
+            Route::get('/teachers', [SchoolController::class, 'teachers'])->name('school.teachers');
+            Route::post('/update-student/{id}', [SchoolController::class, 'updateStudentGroup'])->name('school.student.update');
+            Route::post('/update-teacher/{id}', [SchoolController::class, 'updateTeacherGroup'])->name('school.teacher.update');
         });
 
 

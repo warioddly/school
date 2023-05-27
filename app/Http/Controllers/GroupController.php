@@ -2,50 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StudentGroup;
+use App\Models\StudentGroups;
+use App\Models\TeacherGroups;
 use App\Models\User;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Groups;
 
 class GroupController extends Controller
 {
 
-    public function index()
+    public function index(): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
         $groups = Groups::latest()->get();
         return view('groups.index', compact('groups'));
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-
         $data = $request->validate([
             'title' => 'required',
             'description' => 'required',
         ]);
 
-        Groups::create($data);
+        Groups::query()->create($data);
 
         return redirect()->route('groups')->with('success', 'Group created successfully.');
     }
 
 
-    public function show($id)
+    public function show($id): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
     {
-        $group = Groups::find($id);
+        $group = Groups::query()->find($id);
 
-        $users = StudentGroup::query()->where('group_id', $id)->get();
+        $studentIds = StudentGroups::query()->where('group_id', $id)->get()->pluck('student_id');
+        $teacherIds = TeacherGroups::query()->where('group_id', $id)->get()->pluck('teacher_id');
 
-        $students = User::query()->whereIn('id', $users->pluck('user_id'))->get();
+        $students = User::query()->whereIn('id', $studentIds)->get();
+        $teachers = User::query()->whereIn('id', $teacherIds)->get();
 
-//        $teacher = User::query()->where('id', $group->teacher_id)->first();
-
-        return view('group.show', compact('group', 'students'));
+        return view('groups.show', compact('group', 'students', 'teachers'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
 
         $data = $request->validate([
@@ -59,13 +63,15 @@ class GroupController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $group = Groups::find($id);
         $group->delete();
 
         return redirect()->route('groups')->with('success', 'Group deleted successfully.');
     }
+
+
 
 
 }

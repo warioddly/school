@@ -1,153 +1,102 @@
 @extends('layouts.app')
 
-@section('title', 'Create Course')
+@section('title', 'Course')
 
 @section('content')
 
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box" >
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                            <li class="breadcrumb-item active">Create Project</li>
-                        </ol>
-                    </div>
-                    <div class="d-flex align-items-center"  id="tooltip-back-container">
-                        <a href="{{ route('courses') }}" class="me-2"  data-bs-container="#tooltip-back-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Back"><i class="uil-backward"></i></a>
-                        <h4 class="page-title">Create Projects</h4>
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box">
+                <div class="page-title-right">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Apps</a></li>
+                        <li class="breadcrumb-item active">Calendar</li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Schedule</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+
+                        @include('schedule.fragments.sidebar')
+
+                        <div class="col-lg-9">
+                            <div class="mt-4 mt-lg-0">
+                                <div id="calendar"></div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="mb-3">
-                                    <label for="projectname" class="form-label">Name</label>
-                                    <input type="text" id="projectname" class="form-control" placeholder="Enter project name">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="project-overview" class="form-label">Overview</label>
-                                    <textarea class="form-control" id="project-overview" rows="5" placeholder="Enter some brief about project.."></textarea>
-                                </div>
-
-                                <!-- Date View -->
-                                <div class="mb-3 position-relative" id="datepicker1">
-                                    <label class="form-label">Start Date</label>
-                                    <input type="text" class="form-control" data-provide="datepicker" data-date-container="#datepicker1" data-date-format="d-M-yyyy" data-date-autoclose="true">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="project-budget" class="form-label">Budget</label>
-                                    <input type="text" id="project-budget" class="form-control" placeholder="Enter project budget">
-                                </div>
-
-                                <div class="mb-0">
-                                    <label for="project-overview" class="form-label">Team Members</label>
-
-                                    <select class="form-control select2" data-toggle="select2">
-                                        <option>Select</option>
-                                        <option value="AZ">Mary Scott</option>
-                                        <option value="CO">Holly Campbell</option>
-                                        <option value="ID">Beatrice Mills</option>
-                                        <option value="MT">Melinda Gills</option>
-                                        <option value="NE">Linda Garza</option>
-                                        <option value="NM">Randy Ortez</option>
-                                        <option value="ND">Lorene Block</option>
-                                        <option value="UT">Mike Baker</option>
-                                    </select>
-
-                                    <div class="mt-2" id="tooltip-container">
-                                        <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mat Helme" class="d-inline-block">
-                                            <img src="assets/images/users/avatar-6.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                        </a>
-
-                                        <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Michael Zenaty" class="d-inline-block">
-                                            <img src="assets/images/users/avatar-7.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                        </a>
-
-                                        <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="James Anderson" class="d-inline-block">
-                                            <img src="assets/images/users/avatar-8.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                        </a>
-
-                                        <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Lorene Block" class="d-inline-block">
-                                            <img src="assets/images/users/avatar-4.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                        </a>
-
-                                        <a href="javascript:void(0);" data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="top" title="Mike Baker" class="d-inline-block">
-                                            <img src="assets/images/users/avatar-5.jpg" class="rounded-circle avatar-xs" alt="friend">
-                                        </a>
-                                    </div>
-
-                                </div>
-
-                            </div> <!-- end col-->
-
-                            <div class="col-xl-6">
-                                <div class="mb-3 mt-3 mt-xl-0">
-                                    <label for="projectname" class="mb-0">Avatar</label>
-                                    <p class="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
-
-                                    <form action="/" method="post" class="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews"
-                                          data-upload-preview-template="#uploadPreviewTemplate">
-                                        <div class="fallback">
-                                            <input name="file" type="file" />
-                                        </div>
-
-                                        <div class="dz-message needsclick">
-                                            <i class="h3 text-muted dripicons-cloud-upload"></i>
-                                            <h4>Drop files here or click to upload.</h4>
-                                        </div>
-                                    </form>
-
-                                    <!-- Preview -->
-                                    <div class="dropzone-previews mt-3" id="file-previews"></div>
-
-                                    <!-- file preview template -->
-                                    <div class="d-none" id="uploadPreviewTemplate">
-                                        <div class="card mt-1 mb-0 shadow-none border">
-                                            <div class="p-2">
-                                                <div class="row align-items-center">
-                                                    <div class="col-auto">
-                                                        <img data-dz-thumbnail src="#" class="avatar-sm rounded bg-light" alt="">
-                                                    </div>
-                                                    <div class="col ps-0">
-                                                        <a href="javascript:void(0);" class="text-muted fw-bold" data-dz-name></a>
-                                                        <p class="mb-0" data-dz-size></p>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <!-- Button -->
-                                                        <a href="" class="btn btn-link btn-lg text-muted" data-dz-remove>
-                                                            <i class="dripicons-cross"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
+            <div class="modal fade" id="event-modal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form class="needs-validation" name="event-form" id="form-event" novalidate>
+                            <div class="modal-header py-3 px-4 border-bottom-0">
+                                <h5 class="modal-title" id="modal-title">Event</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body px-4 pb-4 pt-0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="control-label form-label">Event Name</label>
+                                            <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required />
+                                            <div class="invalid-feedback">Please provide a valid event name</div>
                                         </div>
                                     </div>
-                                    <!-- end file preview template -->
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="control-label form-label">Category</label>
+                                            <select class="form-select" name="category" id="event-category" required>
+                                                <option value="bg-danger" selected>Danger</option>
+                                                <option value="bg-success">Success</option>
+                                                <option value="bg-primary">Primary</option>
+                                                <option value="bg-info">Info</option>
+                                                <option value="bg-dark">Dark</option>
+                                                <option value="bg-warning">Warning</option>
+                                            </select>
+                                            <div class="invalid-feedback">Please select a valid event category</div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <!-- Date View -->
-                                <div class="mb-3 position-relative" id="datepicker2">
-                                    <label class="form-label">Due Date</label>
-                                    <input type="text" class="form-control" data-provide="datepicker" data-date-container="#datepicker2" data-date-format="d-M-yyyy" data-date-autoclose="true">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
+                                    </div>
+                                    <div class="col-6 text-end">
+                                        <button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
+                                    </div>
                                 </div>
-                            </div> <!-- end col-->
-                        </div>
-                        <!-- end row -->
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-                    </div> <!-- end card-body -->
-                </div> <!-- end card-->
-            </div> <!-- end col-->
         </div>
+    </div>
 
 @endsection
+
+
+@push('header_scripts')
+    <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
+@endpush
+
+@push('footer_scripts')
+    <script src="{{ asset("assets/js/vendor/jquery-ui.min.js") }}"></script>
+    <script src="{{ asset("assets/js/vendor/fullcalendar.min.js") }}"></script>
+    <script src="{{ asset("assets/js/pages/calendar.js") }}"></script>
+@endpush

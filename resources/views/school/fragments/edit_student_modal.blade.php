@@ -1,6 +1,11 @@
-<div class="modal fade" id="edit-modal"
-     data-bs-backdrop="static" data-bs-keyboard="false"
-     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade"
+     id="edit-modal"
+     data-bs-backdrop="static"
+     data-bs-keyboard="false"
+     tabindex="-1"
+     aria-labelledby="staticBackdropLabel"
+     aria-hidden="true"
+    >
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,13 +15,12 @@
 
             <form action="#" method="POST" >
                 <div class="modal-body">
-
                     @csrf
-                    @method('POST   ')
+                    @method('POST')
 
                     <div class="mb-3">
                         <label for="edit-role" class="form-label">Group</label>
-                        <select class="form-select" id="edit-role">
+                        <select class="form-select" id="edit-role" name="group_id">
                             @foreach($groups as $group)
                                 <option value="{{ $group->id }}">{{ __($group->title) }}</option>
                             @endforeach
