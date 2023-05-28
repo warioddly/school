@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StudentGroups;
 use App\Models\TeacherGroups;
 use App\Models\User;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -66,6 +67,10 @@ class GroupController extends Controller
     public function destroy($id): RedirectResponse
     {
         $group = Groups::find($id);
+
+        StudentGroups::query()->where('group_id', $id)->delete();
+        TeacherGroups::query()->where('group_id', $id)->delete();
+
         $group->delete();
 
         return redirect()->route('groups')->with('success', 'Group deleted successfully.');
@@ -73,5 +78,16 @@ class GroupController extends Controller
 
 
 
+
+    public function teacherGroups(): Renderable {
+
+        $userId = auth()->user()->id;
+
+        $groupIds = TeacherGroups::query()->where('teacher_id', $userId)->get()->pluck('group_id');
+
+        $groups = Groups::query()->whereIn('id', $groupIds)->get();
+
+        return view('groups.lessons', compact('groups'));
+    }
 
 }

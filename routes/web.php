@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'courses'], function () {
             Route::get('/', [App\Http\Controllers\CourseController::class, 'index'])->name('courses');
             Route::get('/create', [App\Http\Controllers\CourseController::class, 'create'])->name('courses.create');
+            Route::get('/tests', [App\Http\Controllers\CourseController::class, 'tests'])->name('courses.tests');
             Route::post('/store', [App\Http\Controllers\CourseController::class, 'store'])->name('courses.store');
             Route::get('/{courses}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
             Route::get('/{courses}/edit', [App\Http\Controllers\CourseController::class, 'edit'])->name('courses.edit');
@@ -51,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'schedule'], function () {
             Route::get('/', [App\Http\Controllers\ScheduleController::class, 'index'])->name('schedule');
+            Route::get('/schedule', [App\Http\Controllers\ScheduleController::class, 'group'])->name('schedule.group');
             Route::get('/show/{id}', [App\Http\Controllers\ScheduleController::class, 'show'])->name('schedule.show');
             Route::put('{id}/update', [App\Http\Controllers\ScheduleController::class, 'update'])->name('schedule.update');
         });
@@ -71,6 +73,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'groups'], function () {
             Route::get('/', [GroupController::class, 'index'])->name('groups');
             Route::get('/show/{id}', [GroupController::class, 'show'])->name('groups.show');
+            Route::get('/lessons', [GroupController::class, 'teacherGroups'])->name('groups.teacher.groups');
             Route::post('/store', [GroupController::class, 'store'])->name('groups.store');
             Route::post('/edit/{id}', [GroupController::class, 'update'])->name('groups.edit');
             Route::delete('/delete/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');

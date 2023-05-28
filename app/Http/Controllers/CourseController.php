@@ -6,7 +6,9 @@ use App\Http\Requests\Courses\CourseStoreRequest;
 use Illuminate\Contracts\Support\Renderable;
 use App\Models\CourseMaterials;
 use App\Models\Tags;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 
 class CourseController extends Controller
@@ -28,7 +30,7 @@ class CourseController extends Controller
     }
 
 
-    public function store(CourseStoreRequest $request)
+    public function store(CourseStoreRequest $request): RedirectResponse
     {
         $course = CourseMaterials::create([ ...$request->validated(), 'author_id' => auth()->id() ]);
         return redirect()->route('courses')->with('success', 'Course created successfully.');
@@ -51,7 +53,7 @@ class CourseController extends Controller
     }
 
 
-    public function update(CourseStoreRequest $request, $id)
+    public function update(CourseStoreRequest $request, $id): RedirectResponse
     {
         $course = CourseMaterials::findOrFail($id);
         $course->update([ ...$request->validated(), 'author_id' => auth()->id() ]);
@@ -59,7 +61,7 @@ class CourseController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $course = CourseMaterials::findOrFail($id);
         $course->delete();
@@ -67,7 +69,7 @@ class CourseController extends Controller
     }
 
 
-    public function search(Request $request)
+    public function search(Request $request): Renderable
     {
         $search = $request->get('search');
         $materials = CourseMaterials::where('title', 'like', '%' . $search . '%')
@@ -75,5 +77,13 @@ class CourseController extends Controller
             ->paginate(20);
         return view('courses.index', compact('materials', 'search'));
     }
+
+
+
+    public function tests(): Renderable
+    {
+        return view('courses.tests');
+    }
+
 
 }

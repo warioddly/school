@@ -47,8 +47,8 @@
                                     <tr>
                                         <th>Group</th>
                                         <th>Description</th>
+                                        <th>Students</th>
                                         <th>Create Date</th>
-                                        <th style="width: 75px;">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -59,28 +59,8 @@
                                                     <a href="{{ route('groups.show', $group->id) }}" class="text-body fw-semibold">{{ $group->title }}</a>
                                                 </td>
                                                 <td> {{ \Illuminate\Support\Str::limit($group->description, $limit=30, '...') }} </td>
+                                                <td> {{ count($group->students()) }} </td>
                                                 <td> {{ $group->created_at }} </td>
-                                                <td>
-{{--                                                    @can(["edit groups"])--}}
-                                                        <a class="action-icon"
-                                                           data-bs-toggle="modal"
-                                                           data-bs-target="#edit-group-modal"
-                                                           data-title="{{ $group->title }}"
-                                                           href="{{ route('groups.edit', $group->id) }}"
-                                                           data-description="{{ $group->description }}"
-                                                        >
-                                                            <i class="mdi mdi-square-edit-outline"></i>
-                                                        </a>
-{{--                                                    @endcan--}}
-{{--                                                    @can(["delete groups"])--}}
-                                                        <a class="action-icon"
-                                                            href="{{ route('groups.destroy', $group->id) }}"
-                                                            data-bs-toggle="modal"
-                                                           data-bs-target="#delete-group-modal"
-                                                        > <i class="mdi mdi-delete"></i></a>
-{{--                                                    @endcan--}}
-
-                                                </td>
                                             </tr>
                                         @endforeach
 

@@ -10,13 +10,15 @@
 
             <p class="text-muted mt-4">Drag and drop your event or click in the calendar</p>
 
-            @foreach($groups as $item)
-                <div class="rounded border bg-success text-white my-1 p-1">
-                    <a href="{{ route('schedule.show', $item->id) }}" class="text-white" data-class="bg-success">
-                        <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>{{ $item->title }}
-                    </a>
-                </div>
-            @endforeach
+            @if (isset($groups))
+                @foreach($groups as $item)
+                    <div class="rounded border bg-success text-white my-1 p-1">
+                        <a href="{{ route('schedule.show', $item->id) }}" class="text-white" data-class="bg-success">
+                            <i class="mdi mdi-checkbox-blank-circle me-2 vertical-middle"></i>{{ $item->title }}
+                        </a>
+                    </div>
+                @endforeach
+            @endif
 
         </div>
 

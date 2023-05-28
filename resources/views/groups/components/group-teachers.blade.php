@@ -40,6 +40,6 @@
 
 @else
     <div class="alert alert-info" role="alert">
-        <i class="mdi mdi-alert-circle-outline me-2"></i> No students found!
+        <i class="mdi mdi-alert-circle-outline me-2"></i> No teachers found!
     </div>
 @endif

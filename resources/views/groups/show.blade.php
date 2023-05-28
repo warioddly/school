@@ -76,7 +76,6 @@
 @push('header_scripts')
     <link href="{{ asset("assets/css/vendor/dataTables.bootstrap5.css") }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset("assets/css/vendor/responsive.bootstrap5.css") }}" rel="stylesheet" type="text/css" />
-    <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
 @endpush
 
 @push('footer_scripts')
@@ -86,12 +85,6 @@
     <script src="{{ asset("assets/js/vendor/dataTables.responsive.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/responsive.bootstrap5.min.js") }}"></script>
 
-
-    <script src="{{ asset("assets/js/vendor/jquery-ui.min.js") }}"></script>
-    <script src="{{ asset("assets/js/vendor/fullcalendar.min.js") }}"></script>
-
-    <script src="{{ asset("assets/js/pages/calendar.js") }}"></script>
     <script src="{{ asset("assets/js/pages/groups.js") }}"></script>
-
 @endpush
 
