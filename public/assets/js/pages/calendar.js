@@ -9,16 +9,14 @@
         (this.$btnNewEvent = l("#btn-new-event")),
         (this.$btnDeleteEvent = l("#btn-delete-event")),
         (this.$btnSave = l("#btn-save")),
+        (this.$saveForm = l("#save-form")),
+        (this.$scheduleInput = l("#schedule-data")),
         (this.$modalTitle = l("#modal-title")),
         (this.$calendarObj = null),
         (this.$selectedEvent = null),
         (this.$newEventData = null);
 
     }
-    (e.prototype.onSave = function (e) {
-        e.preventDefault();
-        console.log(1111);
-    }),
     (e.prototype.onEventClick = function (e) {
         this.$formEvent[0].reset(),
         this.$formEvent.removeClass("was-validated"),
@@ -41,6 +39,7 @@
         this.$calendarObj.unselect();
     }),
     (e.prototype.init = function () {
+
         var e = new Date(l.now());
         new FullCalendar.Draggable(document.getElementById("external-events"), {
             itemSelector: ".external-event",
@@ -48,13 +47,12 @@
                 return { title: e.innerText, className: l(e).data("class") };
             },
         });
-        var t = [
-                { title: "Meeting with Mr. Shreyu", start: new Date(l.now() + 158e6), end: new Date(l.now() + 338e6), className: "bg-warning" },
-                { title: "Interview - Backend Engineer", start: e, end: e, className: "bg-success" },
-                { title: "Phone Screen - Frontend Engineer", start: new Date(l.now() + 168e6), className: "bg-info" },
-                { title: "Buy Design Assets", start: new Date(l.now() + 338e6), end: new Date(l.now() + 4056e5), className: "bg-primary" },
-            ],
+
+        const inputData = this.$scheduleInput.val() ?? "{ }";
+
+        var t = JSON.parse(inputData === "" ? "{}" : inputData) ?? [],
             a = this;
+
         (a.$calendarObj = new FullCalendar.Calendar(a.$calendar[0], {
             slotDuration: "00:15:00",
             slotMinTime: "08:00:00",
@@ -83,23 +81,94 @@
             }),
             a.$formEvent.on("submit", function (e) {
                 e.preventDefault();
-                var t,
-                    n = a.$formEvent[0];
+
+                var dateRangeParts = l("#event-date").val().split(" - ");
+                var startDateString = dateRangeParts[0];
+                var endDateString = dateRangeParts[1];
+
+                var currentYear = new Date().getFullYear();
+
+                var startDateTimeString = startDateString + " " + currentYear;
+                var endDateTimeString = endDateString + " " + currentYear;
+
+                var startParts = startDateTimeString.split(" ");
+                var startDate = startParts[0].split("/");
+                var startTime = startParts[1];
+
+                var endParts = endDateTimeString.split(" ");
+                var endDate = endParts[0].split("/");
+                var endTime = endParts[1];
+
+                var startMonth = parseInt(startDate[1]) - 1; // Adjust month value to be zero-based
+                var startDateObject = new Date(currentYear, startMonth, startDate[0]);
+                startDateObject.setHours(parseHours(startTime));
+                startDateObject.setMinutes(parseMinutes(startTime));
+
+                var endMonth = parseInt(endDate[1]) - 1; // Adjust month value to be zero-based
+                var endDateObject = new Date(currentYear, endMonth, endDate[0]);
+                endDateObject.setHours(parseHours(endTime));
+                endDateObject.setMinutes(parseMinutes(endTime));
+
+                var t, n = a.$formEvent[0];
                 n.checkValidity()
                     ? (a.$selectedEvent
                         ? (a.$selectedEvent.setProp("title", l("#event-title").val()), a.$selectedEvent.setProp("classNames", [l("#event-category").val()]))
-                        : ((t = { title: l("#event-title").val(), start: a.$newEventData.date, allDay: a.$newEventData.allDay, className: l("#event-category").val() }), a.$calendarObj.addEvent(t)),
+                        : ((t = {
+                            title: l("#event-title").val(),
+                            start: startDateObject,
+                            end: endDateObject,
+                            className: l("#event-category").val()
+                        }), a.$calendarObj.addEvent(t)),
                         a.$modal.hide())
                     : (e.stopPropagation(), n.classList.add("was-validated"));
+
+
             }),
-            l(
-                a.$btnDeleteEvent.on("click", function (e) {
+            l(a.$btnDeleteEvent.on("click", function (e) {
                     a.$selectedEvent && (a.$selectedEvent.remove(), (a.$selectedEvent = null), a.$modal.hide());
-                })
-            );
+                }));
+            a.$btnSave.on('click', function (e) {
+                e.preventDefault();
+
+                let events = a.$calendarObj.getEvents(), data = [];
+
+                events.forEach(function(event) {
+                    data.push({
+                        title: event.title,
+                        start: event.start,
+                        end: event.end,
+                        className: event.classNames ?? ["bg-primary"]
+                    });
+                });
+
+                a.$scheduleInput.val(JSON.stringify(data));
+                a.$saveForm.submit();
+
+            });
+
+
     }),
     (l.CalendarApp = new e()),
     (l.CalendarApp.Constructor = e);
+
+
+    function parseHours(timeString) {
+        var parts = timeString.split(":");
+        var hours = parseInt(parts[0]);
+        var meridian = parts[1].split(" ")[1];
+
+        if (meridian === "PM" && hours !== 12) {
+            hours += 12;
+        } else if (meridian === "AM" && hours === 12) {
+            hours = 0;
+        }
+
+        return hours;
+    }
+
+    function parseMinutes(timeString) {
+        return parseInt(timeString.split(":")[1].split(" ")[0]);
+    }
 
 })(window.jQuery),
     (function () {

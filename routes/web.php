@@ -51,7 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'schedule'], function () {
             Route::get('/', [App\Http\Controllers\ScheduleController::class, 'index'])->name('schedule');
-            Route::get('/create', [App\Http\Controllers\ScheduleController::class, 'create'])->name('schedule.create');
+            Route::get('/show/{id}', [App\Http\Controllers\ScheduleController::class, 'show'])->name('schedule.show');
+            Route::put('{id}/update', [App\Http\Controllers\ScheduleController::class, 'update'])->name('schedule.update');
         });
 
 

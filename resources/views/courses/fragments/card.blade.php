@@ -34,7 +34,7 @@
             </h4>
 
 
-            <div class="badge bg-success mb-3"> {{ $item->tag->title }}</div>
+            <div class="badge bg-success mb-3"> {{ $item->tag->title ?? "" }}</div>
 
 
             <p class="text-muted font-13 mb-3">

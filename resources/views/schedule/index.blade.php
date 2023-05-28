@@ -19,6 +19,8 @@
             </div>
         </div>
 
+        @include('layouts.fragments.alerts')
+
         <div class="row">
             <div class="col-12">
 
@@ -26,11 +28,16 @@
                     <div class="card-body">
                         <div class="row">
 
-                            @include('schedule.fragments.sidebar')
-
+                            @if (!auth()->user()->hasRole('student'))
+                                @include('schedule.fragments.sidebar')
+                            @endif
                             <div class="col-lg-9">
                                 <div class="mt-4 mt-lg-0">
-                                    <div id="calendar"></div>
+                                    @if(isset($group))
+                                        <div id="calendar"></div>
+                                    @else
+                                        <h4 class="text-center">Select one group</h4>
+                                    @endif
                                 </div>
                             </div>
 
@@ -38,8 +45,9 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="event-modal" tabindex="-1">
-                    <div class="modal-dialog">
+                @if (!auth()->user()->hasRole('student'))
+                    <div class="modal fade" id="event-modal" tabindex="-1">
+                        <div class="modal-dialog">
                         <div class="modal-content">
                             <form class="needs-validation" name="event-form" id="form-event" novalidate>
                                 <div class="modal-header py-3 px-4 border-bottom-0">
@@ -55,6 +63,18 @@
                                                 <div class="invalid-feedback">Please provide a valid event name</div>
                                             </div>
                                         </div>
+
+                                        <div class="col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Datetime</label>
+                                                <input type="text"
+                                                       class="form-control date"
+                                                       id="event-date"
+                                                       required
+                                                >
+                                            </div>
+                                        </div>
+
                                         <div class="col-12">
                                             <div class="mb-3">
                                                 <label class="control-label form-label">Category</label>
@@ -69,6 +89,7 @@
                                                 <div class="invalid-feedback">Please select a valid event category</div>
                                             </div>
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
@@ -83,7 +104,8 @@
                             </form>
                         </div>
                     </div>
-                </div>
+                    </div>
+                @endif
 
             </div>
         </div>
@@ -91,12 +113,20 @@
 @endsection
 
 
-@push('header_scripts')
-    <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
-@endpush
-
 @push('footer_scripts')
+    <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
     <script src="{{ asset("assets/js/vendor/jquery-ui.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/fullcalendar.min.js") }}"></script>
-    <script src="{{ asset("assets/js/pages/calendar.js") }}"></script>
+    @if(isset($group))
+        <script>
+            $('#event-date').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'DD/MM hh:mm A'
+                }
+            });
+        </script>
+        <script src="{{ asset("assets/js/pages/calendar.js") }}"></script>
+    @endif
 @endpush
