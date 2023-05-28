@@ -47,7 +47,7 @@
                         </div>
 
                         @if (count($users))
-                            
+
                             <div class="table-responsive">
                                 <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="user-datatable">
 
@@ -139,7 +139,6 @@
     <script src="{{ asset("assets/js/vendor/responsive.bootstrap5.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/apexcharts.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/dataTables.checkboxes.min.js") }}"></script>
-    <!-- third party js ends -->
 
     <script src="{{ asset("assets/js/pages/users.js") }}"></script>
 @endpush

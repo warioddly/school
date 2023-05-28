@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::group(['prefix' => 'courses'], function () {
             Route::get('/', [App\Http\Controllers\CourseController::class, 'index'])->name('courses');
             Route::get('/create', [App\Http\Controllers\CourseController::class, 'create'])->name('courses.create');
+            Route::get('/tests', [App\Http\Controllers\CourseController::class, 'tests'])->name('courses.tests');
             Route::post('/store', [App\Http\Controllers\CourseController::class, 'store'])->name('courses.store');
             Route::get('/{courses}', [App\Http\Controllers\CourseController::class, 'show'])->name('courses.show');
             Route::get('/{courses}/edit', [App\Http\Controllers\CourseController::class, 'edit'])->name('courses.edit');
@@ -49,7 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'schedule'], function () {
             Route::get('/', [App\Http\Controllers\ScheduleController::class, 'index'])->name('schedule');
-            Route::get('/create', [App\Http\Controllers\ScheduleController::class, 'create'])->name('schedule.create');
+            Route::get('/schedule', [App\Http\Controllers\ScheduleController::class, 'group'])->name('schedule.group');
+            Route::get('/show/{id}', [App\Http\Controllers\ScheduleController::class, 'show'])->name('schedule.show');
+            Route::put('{id}/update', [App\Http\Controllers\ScheduleController::class, 'update'])->name('schedule.update');
         });
 
 
@@ -66,12 +71,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::group(['prefix' => 'groups'], function () {
-
-            Route::get('/', [\App\Http\Controllers\GroupController::class, 'index'])->name('groups');
-            Route::post('/store', [App\Http\Controllers\GroupController::class, 'store'])->name('groups.store');
-            Route::post('/edit/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('groups.edit');
-            Route::delete('/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('groups.destroy');
-
+            Route::get('/', [GroupController::class, 'index'])->name('groups');
+            Route::get('/show/{id}', [GroupController::class, 'show'])->name('groups.show');
+            Route::get('/lessons', [GroupController::class, 'teacherGroups'])->name('groups.teacher.groups');
+            Route::post('/store', [GroupController::class, 'store'])->name('groups.store');
+            Route::post('/edit/{id}', [GroupController::class, 'update'])->name('groups.edit');
+            Route::delete('/delete/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
         });
 
 
@@ -90,8 +95,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         Route::group(['prefix' => 'school', 'middleware' => ['can:view users']], function () {
-            Route::get('/students', [App\Http\Controllers\SchoolController::class, 'students'])->name('school.students');
-            Route::get('/teachers', [App\Http\Controllers\SchoolController::class, 'teachers'])->name('school.teachers');
+            Route::get('/students', [SchoolController::class, 'students'])->name('school.students');
+            Route::get('/teachers', [SchoolController::class, 'teachers'])->name('school.teachers');
+            Route::post('/update-student/{id}', [SchoolController::class, 'updateStudentGroup'])->name('school.student.update');
+            Route::post('/update-teacher/{id}', [SchoolController::class, 'updateTeacherGroup'])->name('school.teacher.update');
         });
 
 

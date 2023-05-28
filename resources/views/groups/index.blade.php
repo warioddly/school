@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item active">Sellers</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Users</h4>
+                    <h4 class="page-title">Groups</h4>
                 </div>
             </div>
         </div>
@@ -56,9 +56,9 @@
                                         @foreach($groups as $group)
                                             <tr>
                                                 <td class="table-user">
-                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{ $group->title }}</a>
+                                                    <a href="{{ route('groups.show', $group->id) }}" class="text-body fw-semibold">{{ $group->title }}</a>
                                                 </td>
-                                                <td> {{ $group->description }} </td>
+                                                <td> {{ \Illuminate\Support\Str::limit($group->description, $limit=30, '...') }} </td>
                                                 <td> {{ $group->created_at }} </td>
                                                 <td>
 {{--                                                    @can(["edit groups"])--}}
@@ -83,7 +83,6 @@
                                                 </td>
                                             </tr>
                                         @endforeach
-
 
                                     </tbody>
                                 </table>
@@ -116,14 +115,10 @@
 
 @push('footer_scripts')
 
-    <!-- third party js -->
     <script src="{{ asset("assets/js/vendor/jquery.dataTables.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/dataTables.bootstrap5.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/dataTables.responsive.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/responsive.bootstrap5.min.js") }}"></script>
-    <script src="{{ asset("assets/js/vendor/apexcharts.min.js") }}"></script>
-    <script src="{{ asset("assets/js/vendor/dataTables.checkboxes.min.js") }}"></script>
-    <!-- third party js ends -->
 
     <script src="{{ asset("assets/js/pages/groups.js") }}"></script>
 @endpush

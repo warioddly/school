@@ -22,7 +22,6 @@
 
     <div class="row">
         <div class="col-xxl-8 col-xl-7">
-            <!-- project card -->
             <div class="card d-block">
                 <div class="card-body">
                     <div class="dropdown card-widgets">
@@ -80,7 +79,6 @@
                     <h5 class="mt-3">Description:</h5>
 
                     <p class="text-muted mb-4">{{ $course->description }}</p>
-
 
                     <h5 class="mt-3">Overview:</h5>
 

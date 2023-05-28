@@ -16,7 +16,7 @@
                             <li class="breadcrumb-item active">Sellers</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Users</h4>
+                    <h4 class="page-title">Groups</h4>
                 </div>
             </div>
         </div>
@@ -27,43 +27,42 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                @can(["create users"])
+                                    <a href="javascript:void(0);" class="btn btn-danger mb-2"
+                                       data-bs-toggle="modal" data-bs-target="#create-group-modal"
+                                    ><i class="mdi mdi-plus-circle me-2"></i> Add Group</a>
+                                @endcan
+                            </div>
 
-                        @if (count($users))
+                        </div>
+
+                        @if (count($groups))
 
                             <div class="table-responsive">
                                 <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="groups-datatable">
 
                                     <thead class="table-light">
                                     <tr>
-                                        <th>Teacher</th>
-                                        <th>Groups</th>
-                                        <th style="width: 75px;">Action</th>
+                                        <th>Group</th>
+                                        <th>Description</th>
+                                        <th>Students</th>
+                                        <th>Create Date</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach($users as $user)
+                                        @foreach($groups as $group)
                                             <tr>
                                                 <td class="table-user">
-                                                    <img src="{{ asset("assets/images/users/avatar-4.jpg") }}" alt="table-user" class="me-2 rounded-circle">
-                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{ $user->fullName }}</a>
+                                                    <a href="{{ route('groups.show', $group->id) }}" class="text-body fw-semibold">{{ $group->title }}</a>
                                                 </td>
-                                                <td> {{ $user->group_names->map(fn ($group) => __($group))->implode(', ') }}  </td>
-                                                <td>
-
-                                                    @can(["edit users"])
-                                                        <a class="action-icon"
-                                                            href="{{ route('school.teacher.update', $user->id) }}"
-                                                            data-groups="{{ $user->groups }}"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#edit-modal"
-                                                        > <i class="mdi mdi-square-edit-outline"></i></a>
-                                                    @endcan
-
-                                                </td>
+                                                <td> {{ \Illuminate\Support\Str::limit($group->description, $limit=30, '...') }} </td>
+                                                <td> {{ count($group->students()) }} </td>
+                                                <td> {{ $group->created_at }} </td>
                                             </tr>
                                         @endforeach
-
 
                                     </tbody>
                                 </table>
@@ -71,16 +70,21 @@
 
                         @else
                             <div class="alert alert-info" role="alert">
-                                <i class="mdi mdi-alert-circle-outline me-2"></i> No users found!
+                                <i class="mdi mdi-alert-circle-outline me-2"></i> No groups found!
                             </div>
                         @endif
+
 
                     </div>
                 </div>
             </div>
         </div>
 
-        @include('school.fragments.edit_teacher_modal')
+        @include('groups.fragments.create_modal')
+
+        @include('groups.fragments.edit_modal')
+
+        @include('groups.fragments.delete_modal')
 
 @endsection
 
@@ -96,5 +100,5 @@
     <script src="{{ asset("assets/js/vendor/dataTables.responsive.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/responsive.bootstrap5.min.js") }}"></script>
 
-    <script src="{{ asset("assets/js/pages/school.js") }}"></script>
+    <script src="{{ asset("assets/js/pages/groups.js") }}"></script>
 @endpush
