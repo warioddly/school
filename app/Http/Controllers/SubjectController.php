@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Subjects\SubjectRequest;
+use App\Models\Groups;
+use App\Models\StudentGroups;
 use App\Models\Subjects;
 use App\Models\User;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -28,10 +32,21 @@ class SubjectController extends Controller
     }
 
 
-    public function show($id): Factory|Application|View|\Illuminate\Contracts\Foundation\Application
+    public function show($groupId, $id, $startTime): \Illuminate\Contracts\Foundation\Application|Factory|View|Application|RedirectResponse
     {
-        $tag = Subjects::query()->findOrFail($id);
-        return view('Subjects.show', compact('tag'));
+
+
+        if (Carbon::createFromFormat('D M d Y H:i:s e+', $startTime)->dayOfWeek !== Carbon::now()->dayOfWeek) {
+           return redirect()->back()->withErrors(['You can not edit today\'s schedule']);
+        }
+
+
+        $group = Groups::query()->findOrFail($groupId);
+        $subject = Subjects::query()->findOrFail($id);
+        $studentIds = StudentGroups::query()->where('group_id', $groupId)->get()->pluck('student_id');
+        $students = User::query()->whereIn('id', $studentIds)->get();
+
+        return view('graduation.index', compact('students', 'group', 'subject'));
     }
 
 

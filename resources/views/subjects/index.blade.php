@@ -35,14 +35,6 @@
                                 @endcan
                             </div>
 
-
-                            <div class="col-sm-8">
-                                <div class="text-sm-end">
-                                    <button type="button" class="btn btn-success mb-2 me-1"><i class="mdi mdi-cog"></i></button>
-                                    <button type="button" class="btn btn-light mb-2 me-1">Import</button>
-                                    <button type="button" class="btn btn-light mb-2">Export</button>
-                                </div>
-                            </div>
                         </div>
 
                         @if (count($subjects))
@@ -52,12 +44,6 @@
 
                                     <thead class="table-light">
                                     <tr>
-                                        <th style="width: 20px;">
-                                            <div class="form-check">
-                                                <input type="checkbox" class="form-check-input" id="customCheck">
-                                                <label class="form-check-label" for="customCheck">&nbsp;</label>
-                                            </div>
-                                        </th>
                                         <th>Title</th>
                                         <th>Description</th>
                                         <th>Create Date</th>
@@ -68,12 +54,6 @@
 
                                         @foreach($subjects as $subject)
                                             <tr>
-                                                <td>
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="customCheck{{$subject->id}}">
-                                                        <label class="form-check-label" for="customCheck{{$subject->id}}">&nbsp;</label>
-                                                    </div>
-                                                </td>
                                                 <td class="table-user">
                                                     <a href="javascript:void(0);" class="text-body fw-semibold">{{ __($subject->name) }}</a>
                                                 </td>

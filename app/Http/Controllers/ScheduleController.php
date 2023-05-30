@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Groups;
 use App\Models\StudentGroups;
+use App\Models\Subjects;
 use App\Models\TeacherGroups;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
@@ -17,49 +18,51 @@ class ScheduleController extends Controller
 
         if (auth()->user()->hasRole('admin')) {
             $groups = Groups::all();
-            return view('schedule.index', compact('groups'));
+            return view('schedule.index', compact('groups', ));
         }
 
-        $userId = auth()->user()->id;
-
-        $groupIds = TeacherGroups::query()->where('teacher_id', $userId)->get()->pluck('group_id');
+        $groupIds = TeacherGroups::query()->where('teacher_id', auth()->user()->id)->get()->pluck('group_id');
 
         $groups = Groups::query()->whereIn('id', $groupIds)->get();
 
         return view('schedule.index', compact('groups'));
+
     }
+
+
+    public function edit($id): Renderable
+    {
+
+        $group = Groups::query()->findOrFail($id);
+        $subjects = Subjects::all();
+
+        return view('schedule.edit', compact('group', 'subjects'));
+    }
+
 
 
     public function show($id): Renderable
     {
-        $group = Groups::query()->findOrFail($id);
-
-        if (auth()->user()->hasRole('admin')) {
-            $groups = Groups::all();
-            return view('schedule.group', compact('groups', 'group'));
-        }
 
         $userId = auth()->user()->id;
 
-        $groupIds = TeacherGroups::query()->where('teacher_id', $userId)->get()->pluck('group_id');
+        if (auth()->user()->hasRole('student')) {
+
+            $groupId = StudentGroups::query()->where('student_id', $userId)->first()->group_id;
+
+            $group = Groups::query()->findOrFail($groupId);
+
+            return view('schedule.show-as-student', compact('group'));
+        }
+
+
+        $group = Groups::query()->findOrFail($id);
+
+        $groupIds = TeacherGroups::query()->where('teacher_id', 4)->get()->pluck('group_id');
 
         $groups = Groups::query()->whereIn('id', $groupIds)->get();
 
-        return view('schedule.index', compact('group', 'groups'));
-    }
-
-
-
-    public function group(): Renderable
-    {
-
-        $userId = auth()->user()->id;
-
-        $groupIds = StudentGroups::query()->where('student_id', $userId)->get()->pluck('group_id');
-
-        $group = Groups::query()->whereIn('id', $groupIds)->first();
-
-        return view('schedule.group', compact('group', ));
+        return view('schedule.show', compact('group', 'groups'));
     }
 
 

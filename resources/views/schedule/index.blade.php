@@ -45,68 +45,6 @@
                     </div>
                 </div>
 
-                @if (!auth()->user()->hasRole('student'))
-                    <div class="modal fade" id="event-modal" tabindex="-1">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
-                                <div class="modal-header py-3 px-4 border-bottom-0">
-                                    <h5 class="modal-title" id="modal-title">Event</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body px-4 pb-4 pt-0">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label class="control-label form-label">Event Name</label>
-                                                <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required />
-                                                <div class="invalid-feedback">Please provide a valid event name</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Datetime</label>
-                                                <input type="text"
-                                                       class="form-control date"
-                                                       id="event-date"
-                                                       required
-                                                >
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label class="control-label form-label">Category</label>
-                                                <select class="form-select" name="category" id="event-category" required>
-                                                    <option value="bg-danger" selected>Danger</option>
-                                                    <option value="bg-success">Success</option>
-                                                    <option value="bg-primary">Primary</option>
-                                                    <option value="bg-info">Info</option>
-                                                    <option value="bg-dark">Dark</option>
-                                                    <option value="bg-warning">Warning</option>
-                                                </select>
-                                                <div class="invalid-feedback">Please select a valid event category</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <button type="button" class="btn btn-danger" id="btn-delete-event">Delete</button>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <button type="button" class="btn btn-light me-1" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-success" id="btn-save-event">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    </div>
-                @endif
-
             </div>
         </div>
 
@@ -117,16 +55,5 @@
     <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
     <script src="{{ asset("assets/js/vendor/jquery-ui.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/fullcalendar.min.js") }}"></script>
-    @if(isset($group))
-        <script>
-            $('#event-date').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'DD/MM hh:mm A'
-                }
-            });
-        </script>
-        <script src="{{ asset("assets/js/pages/calendar.js") }}"></script>
-    @endif
+    <script src="{{ asset("assets/js/pages/calendar.js") }}"></script>
 @endpush

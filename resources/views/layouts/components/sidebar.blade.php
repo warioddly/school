@@ -48,7 +48,7 @@
         <li class="side-nav-title side-nav-item">Study</li>
 
         <li class="side-nav-item">
-            <a href="{{ (auth()->user()->hasRole('admin'))  ? route('schedule')  : route('schedule.group') }}" class="side-nav-link">
+            <a href="{{ route('schedule') }}" class="side-nav-link">
                 <i class="uil-calender"></i>
                 <span> Schedule </span>
             </a>
@@ -89,10 +89,6 @@
 
             <div class="collapse" id="sidebarTasks">
                 <ul class="side-nav-second-level">
-
-                    @if (auth()->user()->hasAnyRole(['admin', 'teacher']))
-                        <li><a href="{{ route('groups.teacher.groups') }}">Lessons</a></li>
-                    @endif
 
                     <li><a href="{{ route('groups') }}">Groups</a></li>
 
