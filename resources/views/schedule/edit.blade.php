@@ -28,15 +28,25 @@
                 <div class="card-body">
                     <div class="row">
 
-                        <div class="d-none">
-                            @include('schedule.fragments.sidebar')
-                        </div>
-
-                        <div class="@if (auth()->user()->hasAnyRole(['student', 'teacher'])) col-lg-9 @else col-12 @endif">
+                        <div class="col-12">
                             <div class="mt-4 mt-lg-0">
-                                    <div id="calendar"></div>
+                                <div id="calendar"></div>
                             </div>
                         </div>
+
+                        @if(isset($group))
+                            <form action="{{ route('schedule.update', $group->id) }}" class="d-grid mt-3" id="save-form" method="post">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="schedule" value="{{ $group->schedule }}" id="schedule-data">
+                                <div class="col">
+                                    <button class="btn btn-lg font-16 btn-primary" id="btn-save" type="submit" ><i class="mdi mdi-check"></i> Save</button>
+                                </div>
+                            </form>
+
+                            <input type="hidden" value="{{ $group->id }}" id="group-id">
+
+                        @endif
 
                     </div>
                 </div>
@@ -52,11 +62,16 @@
                                 </div>
                                 <div class="modal-body px-4 pb-4 pt-0">
                                     <div class="row">
+
                                         <div class="col-12">
                                             <div class="mb-3">
-                                                <label class="control-label form-label">Event Name</label>
-                                                <input class="form-control" placeholder="Insert Event Name" type="text" name="title" id="event-title" required />
-                                                <div class="invalid-feedback">Please provide a valid event name</div>
+                                                <label class="control-label form-label">Subject</label>
+                                                <select class="form-select" name="category" id="event-title" required>
+                                                    @foreach($subjects as $item)
+                                                        <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="invalid-feedback">Please select a valid event category</div>
                                             </div>
                                         </div>
 
@@ -105,6 +120,9 @@
         </div>
     </div>
 
+
+
+
 @endsection
 
 
@@ -112,16 +130,5 @@
     <link href="{{{ asset("assets/css/vendor/fullcalendar.min.css") }}}" rel="stylesheet" type="text/css" />
     <script src="{{ asset("assets/js/vendor/jquery-ui.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/fullcalendar.min.js") }}"></script>
-    @if(isset($group))
-        <script>
-            $('#event-date').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'DD/MM hh:mm A'
-                }
-            });
-        </script>
-        <script src="{{ asset("assets/js/pages/calendar.group.js") }}"></script>
-    @endif
+    <script src="{{ asset("assets/js/pages/calendar.edit.js") }}"></script>
 @endpush

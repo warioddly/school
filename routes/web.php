@@ -52,7 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'schedule'], function () {
             Route::get('/', [App\Http\Controllers\ScheduleController::class, 'index'])->name('schedule');
-            Route::get('/schedule', [App\Http\Controllers\ScheduleController::class, 'group'])->name('schedule.group');
+            Route::get('/edit/{id}', [App\Http\Controllers\ScheduleController::class, 'edit'])->name('schedule.edit');
             Route::get('/show/{id}', [App\Http\Controllers\ScheduleController::class, 'show'])->name('schedule.show');
             Route::put('{id}/update', [App\Http\Controllers\ScheduleController::class, 'update'])->name('schedule.update');
         });
@@ -91,9 +91,18 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::group(['prefix' => 'subjects'], function () {
             Route::get('/', [App\Http\Controllers\SubjectController::class, 'index'])->name('subjects');
+            Route::get('/show/{groupId}/{id}/{startTime}', [App\Http\Controllers\SubjectController::class, 'show'])->name('subjects.show');
             Route::post('/store', [App\Http\Controllers\SubjectController::class, 'store'])->name('subjects.store');
             Route::patch('/update/{id}', [App\Http\Controllers\SubjectController::class, 'update'])->name('subjects.update');
             Route::delete('/delete/{id}', [App\Http\Controllers\SubjectController::class, 'destroy'])->name('subjects.destroy');
+        });
+
+
+
+
+        Route::group(['prefix' => 'grade'], function () {
+            Route::post('/store', [App\Http\Controllers\GradeController::class, 'store'])->name('grade.store');
+            Route::patch('/update/{id}', [App\Http\Controllers\GradeController::class, 'update'])->name('grade.update');
         });
 
 
@@ -101,6 +110,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
             Route::get('/create', [App\Http\Controllers\ScheduleController::class, 'create'])->name('notifications.create');
         });
+
 
 
         Route::group(['prefix' => 'school', 'middleware' => ['can:view users']], function () {
@@ -111,11 +121,13 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
 
+
         Route::group(['prefix' => 'documents'], function () {
             Route::get('/', [App\Http\Controllers\DocumentController::class, 'index'])->name('documents');
             Route::get('/create', [App\Http\Controllers\DocumentController::class, 'create'])->name('documents.create');
             Route::post('/store', [App\Http\Controllers\DocumentController::class, 'store'])->name('documents.store');
         });
+
 
 
         Route::group(['prefix' => 'applications'], function () {
@@ -125,11 +137,13 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
 
+
         Route::group(['prefix' => 'users', 'middleware' => ['can:view users']], function () {
             Route::get('/', [App\Http\Controllers\UserController::class, 'index'])->name('users');
             Route::post('/store', [App\Http\Controllers\UserController::class, 'store'])->name('users.store');
             Route::delete('/delete/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
         });
+
 
 
         Route::group(['prefix' => 'roles', 'middleware' => ['can:view roles']], function () {

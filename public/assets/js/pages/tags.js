@@ -11,13 +11,6 @@ $(document).ready(function () {
         },
         pageLength: 10,
         columns: [
-            {
-                orderable: !1,
-                render: function (e, a, l, t) {
-                    return "display" === a && (e = '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>'), e;
-                },
-                checkboxes: { selectRow: !0, selectAllRender: '<div class="form-check"><input type="checkbox" class="form-check-input dt-checkboxes"><label class="form-check-label">&nbsp;</label></div>' },
-            },
             { orderable: !0 },
             { orderable: !0 },
             { orderable: !1 },
