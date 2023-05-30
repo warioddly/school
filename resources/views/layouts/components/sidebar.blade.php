@@ -48,7 +48,7 @@
         <li class="side-nav-title side-nav-item">Study</li>
 
         <li class="side-nav-item">
-            <a href="{{ (auth()->user()->hasRole('admin'))  ? route('schedule.group')  : route('schedule.group') }}" class="side-nav-link">
+            <a href="{{ (auth()->user()->hasRole('admin'))  ? route('schedule')  : route('schedule.group') }}" class="side-nav-link">
                 <i class="uil-calender"></i>
                 <span> Schedule </span>
             </a>
