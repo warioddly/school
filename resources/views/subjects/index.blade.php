@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tags')
+@section('title', 'Subjects')
 
 @section('content')
 
@@ -15,7 +15,7 @@
                             <li class="breadcrumb-item active">Sellers</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Tags</h4>
+                    <h4 class="page-title">Subjects</h4>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
                                 @can(["create users"])
                                     <a href="javascript:void(0);" class="btn btn-danger mb-2"
                                        data-bs-toggle="modal" data-bs-target="#create-modal"
-                                    ><i class="mdi mdi-plus-circle me-2"></i> Add Tag</a>
+                                    ><i class="mdi mdi-plus-circle me-2"></i> Add Subject</a>
                                 @endcan
                             </div>
 
@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        @if (count($tags))
+                        @if (count($subjects))
 
                             <div class="table-responsive">
                                 <table class="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="user-datatable">
@@ -59,34 +59,38 @@
                                             </div>
                                         </th>
                                         <th>Title</th>
+                                        <th>Description</th>
                                         <th>Create Date</th>
                                         <th style="width: 75px;">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
 
-                                        @foreach($tags as $tag)
+                                        @foreach($subjects as $subject)
                                             <tr>
                                                 <td>
                                                     <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="customCheck{{$tag->id}}">
-                                                        <label class="form-check-label" for="customCheck{{$tag->id}}">&nbsp;</label>
+                                                        <input type="checkbox" class="form-check-input" id="customCheck{{$subject->id}}">
+                                                        <label class="form-check-label" for="customCheck{{$subject->id}}">&nbsp;</label>
                                                     </div>
                                                 </td>
                                                 <td class="table-user">
-                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{ __($tag->title) }}</a>
+                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{ __($subject->name) }}</a>
                                                 </td>
-                                                <td> {{ $tag->created_at }} </td>
+                                                <td> {{ $subject->description }} </td>
+                                                <td> {{ $subject->created_at }} </td>
                                                 <td>
                                                     {{-- @can(["edit tags"]) --}}
                                                         <a class="action-icon"
-                                                        data-bs-toggle="modal" data-bs-target="#edit-modal" data-title="{{ $tag->title }}"
-                                                        href="{{ route('tags.update', $tag->id) }}"
+                                                        data-bs-toggle="modal" data-bs-target="#edit-modal"
+                                                        data-title="{{ $subject->name }}"
+                                                        data-description="{{ $subject->description }}"
+                                                        href="{{ route('subjects.update', $subject->id) }}"
                                                         > <i class="mdi mdi-square-edit-outline"></i></a>
                                                     {{-- @endcan --}}
                                                     {{-- @can(["delete tags"]) --}}
                                                         <a class="action-icon"
-                                                        href="{{ route('tags.destroy', $tag->id) }}"
+                                                        href="{{ route('subjects.destroy', $subject->id) }}"
                                                         data-bs-toggle="modal" data-bs-target="#delete-modal"
                                                         > <i class="mdi mdi-delete"></i></a>
                                                     {{-- @endcan --}}
@@ -102,7 +106,7 @@
 
                         @else
                             <div class="alert alert-info" role="alert">
-                                <i class="mdi mdi-alert-circle-outline me-2"></i> No tags found!
+                                <i class="mdi mdi-alert-circle-outline me-2"></i> No subject found!
                             </div>
                         @endif
 
@@ -112,11 +116,12 @@
             </div>
         </div>
 
-        @include('tags.fragments.create_modal')
 
-        @include('tags.fragments.edit_modal')
+        @include('subjects.fragments.create_modal')
 
-        @include('tags.fragments.delete_modal')
+        @include('subjects.fragments.edit_modal')
+
+        @include('subjects.fragments.delete_modal')
 
 @endsection
 
@@ -132,5 +137,5 @@
     <script src="{{ asset("assets/js/vendor/dataTables.responsive.min.js") }}"></script>
     <script src="{{ asset("assets/js/vendor/responsive.bootstrap5.min.js") }}"></script>
 
-    <script src="{{ asset("assets/js/pages/tags.js") }}"></script>
+    <script src="{{ asset("assets/js/pages/subjects.js") }}"></script>
 @endpush

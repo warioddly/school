@@ -36,7 +36,7 @@ class ScheduleController extends Controller
 
         if (auth()->user()->hasRole('admin')) {
             $groups = Groups::all();
-            return view('schedule.index', compact('groups'));
+            return view('schedule.group', compact('groups', 'group'));
         }
 
         $userId = auth()->user()->id;

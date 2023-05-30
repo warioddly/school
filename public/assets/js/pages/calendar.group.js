@@ -15,7 +15,6 @@
             (this.$calendarObj = null),
             (this.$selectedEvent = null),
             (this.$newEventData = null);
-
     }
     (e.prototype.onEventClick = function (e) {
         // this.$formEvent[0].reset(),
@@ -40,7 +39,7 @@
         }),
         (e.prototype.init = function () {
 
-            var e = new Date(l.now());
+            const e = new Date(l.now());
             // new FullCalendar.Draggable(document.getElementById("external-events"), {
             //     // itemSelector: ".external-event",
             //     eventData: function (e) {

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Course')
+@section('title', 'Schedule')
 
 @section('content')
 
@@ -32,7 +32,7 @@
                             @include('schedule.fragments.sidebar')
                         </div>
 
-                        <div class="@if (!auth()->user()->hasRole('student')) col-lg-9 @else col-12 @endif">
+                        <div class="@if (auth()->user()->hasAnyRole(['student', 'teacher'])) col-lg-9 @else col-12 @endif">
                             <div class="mt-4 mt-lg-0">
                                     <div id="calendar"></div>
                             </div>

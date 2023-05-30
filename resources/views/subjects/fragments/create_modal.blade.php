@@ -8,20 +8,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
             </div>
 
-            <form action="{{ route("tags.store") }}" method="POST" >
+            <form action="{{ route("subjects.store") }}" method="POST" >
                 @csrf
 
                 <div class="modal-body">
 
                     <div class="row g-sm-3">
 
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="name" class="form-label">Title</label>
-                            <input class="form-control" type="text" id="name" name="title" required placeholder="Enter title">
+                            <input class="form-control" type="text" id="title" name="name" required placeholder="Enter title">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="description" class="form-label">Description</label>
+                            <input class="form-control" type="text" id="description" name="description" required placeholder="Enter description">
+                        </div>
+
+                        <div class="mb-2">
+                            <label for="teacher" class="form-label">Teacher</label>
+                            <select name="teacher_id" id="teacher" class="form-select">
+                                @foreach($users as $user)
+                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                     </div>
-
 
                 </div>
                 <div class="modal-footer">
