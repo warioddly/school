@@ -13,9 +13,23 @@
                     @csrf
                     @method('PATCH')
 
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <label for="edit-title" class="form-label">Title</label>
-                        <input class="form-control" type="text" id="edit-title" name="title" required placeholder="Input title...">
+                        <input class="form-control" type="text" id="edit-title" name="name" required placeholder="Input title...">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="edit-description" class="form-label">Description</label>
+                        <input class="form-control" type="text" id="edit-description" name="description" required placeholder="Input description...">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="edit-teacher" class="form-label">Teacher</label>
+                        <select name="teacher_id" id="edit-teacher" class="form-select">
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                 </div>

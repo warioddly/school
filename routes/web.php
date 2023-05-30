@@ -88,6 +88,15 @@ Route::group(['middleware' => 'auth'], function () {
         });
 
 
+
+        Route::group(['prefix' => 'subjects'], function () {
+            Route::get('/', [App\Http\Controllers\SubjectController::class, 'index'])->name('subjects');
+            Route::post('/store', [App\Http\Controllers\SubjectController::class, 'store'])->name('subjects.store');
+            Route::patch('/update/{id}', [App\Http\Controllers\SubjectController::class, 'update'])->name('subjects.update');
+            Route::delete('/delete/{id}', [App\Http\Controllers\SubjectController::class, 'destroy'])->name('subjects.destroy');
+        });
+
+
         Route::group(['prefix' => 'notifications'], function () {
             Route::get('/', [App\Http\Controllers\NotificationController::class, 'index'])->name('notifications');
             Route::get('/create', [App\Http\Controllers\ScheduleController::class, 'create'])->name('notifications.create');

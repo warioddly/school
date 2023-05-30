@@ -100,6 +100,8 @@
 
                     <li><a href="{{ route('school.teachers') }}">Teachers</a></li>
 
+                    <li><a href="{{ route('subjects') }}">{{ __('Subjects') }}</a></li>
+
                 </ul>
             </div>
         </li>
